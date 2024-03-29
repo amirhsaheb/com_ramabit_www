@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:com_ramabit_www/my_button_register_singup.dart';
 import 'package:flutter/material.dart';
 import 'package:com_ramabit_www/my_textfeild.dart';
