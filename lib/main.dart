@@ -1,9 +1,10 @@
+import 'package:com_ramabit_www/RegisterPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:http/http.dart' as http;
 // ignore: library_prefixes
 import 'package:com_ramabit_www/page1.dart' as FirstScreen;
 import 'package:com_ramabit_www/menu.dart' as menu;
+import 'package:com_ramabit_www/LoginPage.dart';
 
 /// Flutter code sample for [AppBar].
 
@@ -43,29 +44,29 @@ class AppBarExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const menu.Menu(),
-      appBar: AppBar(
-        // leading: Image(image: AssetImage('images/logo.png')),
+      // drawer: const menu.Menu(),
+      // appBar: AppBar(
+      //   // leading: Image(image: AssetImage('images/logo.png')),
 
-        foregroundColor: const Color.fromARGB(255, 41, 41, 41),
-        backgroundColor: const Color.fromARGB(255, 240, 187, 19),
-        title: const Text('AppBar Demo'),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.add_alert),
-            tooltip: 'Show Snackbar',
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.navigate_next),
-            tooltip: 'Go to the next page',
-            onPressed: () {
-              Navigator.pushNamed(context, '/second');
-            },
-          ),
-        ],
-      ),
-      body: const FirstScreen.FirstScreen(),
+      //   foregroundColor: const Color.fromARGB(255, 41, 41, 41),
+      //   backgroundColor: const Color.fromARGB(255, 240, 187, 19),
+      //   title: const Text('AppBar Demo'),
+      //   actions: <Widget>[
+      //     IconButton(
+      //       icon: const Icon(Icons.add_alert),
+      //       tooltip: 'Show Snackbar',
+      //       onPressed: () {},
+      //     ),
+      //     IconButton(
+      //       icon: const Icon(Icons.navigate_next),
+      //       tooltip: 'Go to the next page',
+      //       onPressed: () {
+      //         Navigator.pushNamed(context, '/second');
+      //       },
+      //     ),
+      //   ],
+      // ),
+      body: PageRegister(), //const FirstScreen.FirstScreen()
     );
   }
 }
