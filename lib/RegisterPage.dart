@@ -9,6 +9,9 @@ class PageRegister extends StatelessWidget {
 
   final usernamecontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
+  final repasswordcontroller = TextEditingController();
+  final Emailcontroller = TextEditingController();
+  final phonenumbercontroller = TextEditingController();
 
   void UserSingup() {}
 
@@ -100,7 +103,7 @@ class PageRegister extends StatelessWidget {
               ),
 
               MyTextFeild(
-                controller: passwordcontroller,
+                controller: repasswordcontroller,
                 hinttext: 'تکرار رمز عبور',
                 secretpass: true,
               ), //password
@@ -110,9 +113,9 @@ class PageRegister extends StatelessWidget {
               ),
               //singin buttons
               MyTextFeild(
-                controller: passwordcontroller,
+                controller: Emailcontroller,
                 hinttext: 'ایمیل',
-                secretpass: true,
+                secretpass: false,
               ), //password
 
               SizedBox(
@@ -120,9 +123,9 @@ class PageRegister extends StatelessWidget {
               ),
 
               MyTextFeild(
-                controller: passwordcontroller,
+                controller: phonenumbercontroller,
                 hinttext: 'موبایل',
-                secretpass: true,
+                secretpass: false,
               ), //password
 
               SizedBox(
