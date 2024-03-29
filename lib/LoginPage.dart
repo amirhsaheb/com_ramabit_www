@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:com_ramabit_www/my_button_register_singup.dart';
 import 'package:flutter/material.dart';
 import 'package:com_ramabit_www/my_textfeild.dart';
@@ -10,6 +12,7 @@ class PageLogin extends StatelessWidget {
   final passwordcontroller = TextEditingController();
 
   void UserSingIn() {}
+  void UserSingup() {}
 
   @override
   Widget build(BuildContext context) {
@@ -119,8 +122,21 @@ class PageLogin extends StatelessWidget {
                 height: 15,
               ),
 
-              MyButtonSingup(
-                onTap: UserSingIn,
+              Container(
+                padding: const EdgeInsets.all(10.0),
+                margin: const EdgeInsets.symmetric(horizontal: 26),
+                decoration: BoxDecoration(
+                    color: Color(0xFFFFD700),
+                    borderRadius: BorderRadius.circular(8)),
+                child: Center(
+                  child: Text(
+                    'ثبت نام',
+                    style: TextStyle(
+                        color: Colors.grey[800],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25),
+                  ),
+                ),
               ),
 
               // Row(
