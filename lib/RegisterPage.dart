@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:com_ramabit_www/my_textfeild.dart';
-import 'package:com_ramabit_www/my_button_login_singin.dart';
+// import 'package:com_ramabit_www/my_button_login_singin.dart';
 import 'package:com_ramabit_www/my_button_register_singup.dart';
 import 'package:flutter/widgets.dart';
 
@@ -13,11 +13,12 @@ class PageRegister extends StatelessWidget {
   final Emailcontroller = TextEditingController();
   final phonenumbercontroller = TextEditingController();
 
-  void UserSingup() {}
+  // void UserSingup() {}
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scrollBehavior: ScrollBehavior(),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.grey[900],
@@ -136,9 +137,9 @@ class PageRegister extends StatelessWidget {
                 height: 15,
               ),
 
-              MyButtonSingup(
-                onTap: UserSingup,
-              ),
+              // MyButtonSingup(
+              //   onTap: UserSingup,
+              // ),
 
               // Row(
               //   mainAxisAlignment: MainAxisAlignment.center,
