@@ -25,11 +25,28 @@ class PageLogin extends StatelessWidget {
                 height: 30,
               ),
               //LOGO
-              Icon(
-                color: Color(0xFFFFD700),
-                Icons.lock,
-                size: 100,
+              Container(
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 67, 68, 68),
+                    borderRadius: BorderRadius.circular(50),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0xFFFFD700),
+                        blurRadius: 100,
+                        offset: Offset(4, 8),
+                      )
+                    ]),
+                child: Image.asset(
+                  'images/logo.png',
+                  height: 90,
+                ),
               ),
+
+              // Icon(
+              //   color: Color(0xFFFFD700),
+              //   Icons.lock,
+              //   size: 100,
+              // ),
               SizedBox(
                 height: 15,
               ),
@@ -120,19 +137,22 @@ class PageLogin extends StatelessWidget {
                 height: 15,
               ),
 
-              Container(
-                padding: const EdgeInsets.all(10.0),
-                margin: const EdgeInsets.symmetric(horizontal: 26),
-                decoration: BoxDecoration(
-                    color: Color(0xFFFFD700),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Center(
-                  child: Text(
-                    'ثبت نام',
-                    style: TextStyle(
-                        color: Colors.grey[800],
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25),
+              TextButton(
+                onPressed: () => "",
+                child: Container(
+                  padding: const EdgeInsets.all(5.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: BoxDecoration(
+                      color: Color(0xFFFFD700),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Center(
+                    child: Text(
+                      'ثبت نام',
+                      style: TextStyle(
+                          color: Colors.grey[800],
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                    ),
                   ),
                 ),
               ),

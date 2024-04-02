@@ -137,6 +137,26 @@ class PageRegister extends StatelessWidget {
                 height: 15,
               ),
 
+              TextButton(
+                onPressed: () => "",
+                child: Container(
+                  padding: const EdgeInsets.all(5.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: BoxDecoration(
+                      color: Color(0xFFFFD700),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Center(
+                    child: Text(
+                      'ثبت نام',
+                      style: TextStyle(
+                          color: Colors.grey[800],
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                    ),
+                  ),
+                ),
+              ),
+
               // MyButtonSingup(
               //   onTap: UserSingup,
               // ),

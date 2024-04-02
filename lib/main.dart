@@ -1,4 +1,5 @@
 import 'package:com_ramabit_www/RegisterPage.dart';
+import 'package:com_ramabit_www/activity1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 // ignore: library_prefixes
@@ -66,7 +67,7 @@ class AppBarExample extends StatelessWidget {
       //     ),
       //   ],
       // ),
-      body: PageRegister(), //const FirstScreen.FirstScreen()
+      body: CarouselDemo(), //const FirstScreen.FirstScreen()
     );
   }
 }
