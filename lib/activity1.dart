@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/src/rendering/box.dart';
 
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -7,7 +11,7 @@ final List<String> imgList = [
   'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
   'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
   'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-  'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
+  'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80',
 ];
 
 void main() => runApp(CarouselDemoHome());
@@ -41,7 +45,7 @@ class CarouselDemoHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Carousel demo'),
+          title: Text('Rambit'),
           actions: [
             IconButton(
                 icon: Icon(Icons.nightlight_round),
@@ -103,18 +107,144 @@ final List<Widget> imageSliders = imgList
     .toList();
 
 class ComplicatedImageDemo extends StatelessWidget {
+  final List<int> numbers = [1, 2, 3, 5, 8, 13, 21, 34, 55];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Complicated image slider demo')),
-      body: Container(
-        child: CarouselSlider(
-          options: CarouselOptions(
-            autoPlay: true,
-            aspectRatio: 2.0,
-            enlargeCenterPage: true,
-          ),
-          items: imageSliders,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              child: CarouselSlider(
+                options: CarouselOptions(
+                  autoPlay: true,
+                  aspectRatio: 2.0,
+                  enlargeCenterPage: true,
+                ),
+                items: imageSliders,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 300,
+                  height: 150,
+                  child: Text('data'),
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Divider(
+                    thickness: 0.5,
+                    color: Colors.grey[400],
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text(
+                    'پلن ها',
+                    style: TextStyle(
+                        color: Colors.grey[100], fontWeight: FontWeight.bold),
+                  ),
+                ),
+                // Expanded(
+                //   child: Divider(
+                //     thickness: 0.5,
+                //     color: Colors.grey[400],
+                //   ),
+                // ),
+              ],
+            ),
+            SizedBox(
+              height: 0,
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: SizedBox(
+                    height: 160,
+                    child: ListView(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        Container(
+                          width: 90,
+                          // color: Colors.red,
+                          child: Image.asset('images/Artboard1.png'),
+                        ),
+                        Container(
+                          width: 90,
+                          // color: Colors.blue,
+                          child: Image.asset('images/Artboard1.png'),
+                        ),
+                        Container(
+                          width: 90,
+                          // color: Colors.green,
+                          child: Image.asset('images/Artboard1.png'),
+                        ),
+                        Container(
+                          width: 90,
+                          // color: Colors.yellow,
+                          child: Image.asset('images/Artboard1.png'),
+                        ),
+                        Container(
+                          width: 90,
+                          // color: Colors.orange,
+                          child: Image.asset('images/Artboard1.png'),
+                        ),
+                      ],
+
+                      // itemCount: products.length,
+                    ),
+                  ),
+                ),
+                // IconButton(
+                //   icon: Icon(Icons.remove_circle),
+                //   onPressed: () {},
+                // ),
+              ],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Divider(
+                    thickness: 0.5,
+                    color: Colors.grey[400],
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text(
+                    'پلن ها',
+                    style: TextStyle(
+                        color: Colors.grey[100], fontWeight: FontWeight.bold),
+                  ),
+                ),
+
+                // Expanded(
+                //   child: Divider(
+                //     thickness: 0.5,
+                //     color: Colors.grey[400],
+                //   ),
+                // ),
+              ],
+            ),
+          ],
         ),
       ),
     );
