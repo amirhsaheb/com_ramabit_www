@@ -1,9 +1,12 @@
 import 'dart:math';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/src/rendering/box.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:bootstrap_icons/bootstrap_icons.dart';
 
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -127,15 +130,317 @@ class ComplicatedImageDemo extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 300,
-                  height: 150,
-                  child: Text('data'),
-                )
-              ],
+            SafeArea(
+              child: Container(
+                color: Color.fromARGB(93, 55, 55, 55),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          MediaQuery.of(context).size.width *
+                                              .06),
+                                  child: TextButton(
+                                      onPressed: () {
+                                        debugPrint('Received click');
+                                      },
+                                      child: const Column(
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Icon(
+                                                BootstrapIcons.box_arrow_up,
+                                                size: 30,
+                                                color: Color(0xFFFFD700),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'برداشت',
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 53, 192, 40),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                      // Text('\n'),
+
+                                      ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          MediaQuery.of(context).size.width *
+                                              .06),
+                                  child: TextButton(
+                                      onPressed: () {
+                                        debugPrint('Received click');
+                                      },
+                                      child: const Column(
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Icon(
+                                                BootstrapIcons
+                                                    .box_arrow_in_down,
+                                                size: 32,
+                                                color: Color(0xFFFFD700),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'واریز',
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 192, 40, 40),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                      // Text('\n'),
+
+                                      ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          MediaQuery.of(context).size.width *
+                                              .07),
+                                  child: TextButton(
+                                      onPressed: () {
+                                        debugPrint('Received click');
+                                      },
+                                      child: const Column(
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Icon(
+                                                BootstrapIcons.gpu_card,
+                                                size: 29,
+                                                color: Color(0xFFFFD700),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'ماینر',
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 255, 255, 255),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                      // Text('\n'),
+
+                                      ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          MediaQuery.of(context).size.width *
+                                              .06),
+                                  child: TextButton(
+                                      onPressed: () {
+                                        debugPrint('Received click');
+                                      },
+                                      child: const Column(
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Icon(
+                                                BootstrapIcons.box_seam,
+                                                size: 27,
+                                                color: Color(0xFFFFD700),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'پلن ها',
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 84, 50, 253),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                      // Text('\n'),
+
+                                      ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          MediaQuery.of(context).size.width *
+                                              .06),
+                                  child: TextButton(
+                                      onPressed: () {
+                                        debugPrint('Received click');
+                                      },
+                                      child: const Column(
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Icon(
+                                                BootstrapIcons.clock_history,
+                                                size: 30,
+                                                color: Color(0xFFFFD700),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'تاریخچه',
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 255, 255, 255),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                      // Text('\n'),
+
+                                      ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          MediaQuery.of(context).size.width *
+                                              .06),
+                                  child: TextButton(
+                                      onPressed: () {
+                                        debugPrint('Received click');
+                                      },
+                                      child: const Column(
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Icon(
+                                                BootstrapIcons.card_checklist,
+                                                size: 30,
+                                                color: Color(0xFFFFD700),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'کسب دارمد',
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 255, 255, 255),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                      // Text('\n'),
+
+                                      ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+
+                    // Container(
+                    //   width: 300,
+                    //   height: 150,
+                    //   child: Text('data'),
+                    //   color: Colors.blue[400],
+
+                    // )
+                  ],
+                ),
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
