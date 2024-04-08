@@ -16,6 +16,8 @@ dependencies:
   carousel_slider: ^4.2.1
   font_awesome_flutter: ^10.7.0
   bootstrap_icons: ^1.11.3
+  google_fonts: ^6.2.1
+  ionicons: ^0.2.2
 
 dev_dependencies:
   flutter_test:

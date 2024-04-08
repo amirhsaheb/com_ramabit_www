@@ -5,13 +5,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/src/rendering/box.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:bootstrap_icons/bootstrap_icons.dart';
+import 'package:ionicons/ionicons.dart';
 
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
   'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+  'https://images.unsplash.com/photo-1519125323398-675f0ddb6208?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
   'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
   'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
   'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80',
@@ -97,7 +96,7 @@ final List<Widget> imageSliders = imgList
                           'No. ${imgList.indexOf(item)} image',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 20.0,
+                            fontSize: 20.6,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -132,7 +131,7 @@ class ComplicatedImageDemo extends StatelessWidget {
             ),
             SafeArea(
               child: Container(
-                color: Color.fromARGB(93, 55, 55, 55),
+                color: Color.fromARGB(93, 19, 19, 19),
                 child: Column(
                   children: [
                     Row(
@@ -157,9 +156,10 @@ class ComplicatedImageDemo extends StatelessWidget {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Icon(
-                                                BootstrapIcons.box_arrow_up,
-                                                size: 30,
-                                                color: Color(0xFFFFD700),
+                                                Ionicons.log_out_outline,
+                                                size: 26,
+                                                color: Color.fromARGB(
+                                                    255, 240, 187, 11),
                                               ),
                                             ],
                                           ),
@@ -169,7 +169,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                                                 'برداشت',
                                                 style: TextStyle(
                                                     color: Color.fromARGB(
-                                                        255, 53, 192, 40),
+                                                        255, 255, 255, 255),
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 12),
                                               ),
@@ -204,10 +204,10 @@ class ComplicatedImageDemo extends StatelessWidget {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Icon(
-                                                BootstrapIcons
-                                                    .box_arrow_in_down,
-                                                size: 32,
-                                                color: Color(0xFFFFD700),
+                                                Ionicons.log_in_outline,
+                                                size: 26,
+                                                color: Color.fromARGB(
+                                                    255, 240, 187, 11),
                                               ),
                                             ],
                                           ),
@@ -216,8 +216,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                                               Text(
                                                 'واریز',
                                                 style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 192, 40, 40),
+                                                    color: Colors.white,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 12),
                                               ),
@@ -253,9 +252,10 @@ class ComplicatedImageDemo extends StatelessWidget {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Icon(
-                                                BootstrapIcons.gpu_card,
-                                                size: 29,
-                                                color: Color(0xFFFFD700),
+                                                Ionicons.hardware_chip_outline,
+                                                size: 26,
+                                                color: Color.fromARGB(
+                                                    255, 240, 187, 11),
                                               ),
                                             ],
                                           ),
@@ -305,9 +305,10 @@ class ComplicatedImageDemo extends StatelessWidget {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Icon(
-                                                BootstrapIcons.box_seam,
-                                                size: 27,
-                                                color: Color(0xFFFFD700),
+                                                Ionicons.cube_outline,
+                                                size: 26,
+                                                color: Color.fromARGB(
+                                                    255, 240, 187, 11),
                                               ),
                                             ],
                                           ),
@@ -317,7 +318,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                                                 'پلن ها',
                                                 style: TextStyle(
                                                     color: Color.fromARGB(
-                                                        255, 84, 50, 253),
+                                                        255, 255, 255, 255),
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 12),
                                               ),
@@ -352,9 +353,10 @@ class ComplicatedImageDemo extends StatelessWidget {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Icon(
-                                                BootstrapIcons.clock_history,
-                                                size: 30,
-                                                color: Color(0xFFFFD700),
+                                                Ionicons.time_outline,
+                                                size: 26,
+                                                color: Color.fromARGB(
+                                                    255, 240, 187, 11),
                                               ),
                                             ],
                                           ),
@@ -400,9 +402,10 @@ class ComplicatedImageDemo extends StatelessWidget {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Icon(
-                                                BootstrapIcons.card_checklist,
-                                                size: 30,
-                                                color: Color(0xFFFFD700),
+                                                Ionicons.briefcase_outline,
+                                                size: 24,
+                                                color: Color.fromARGB(
+                                                    255, 240, 187, 11),
                                               ),
                                             ],
                                           ),
@@ -432,7 +435,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                     ),
 
                     // Container(
-                    //   width: 300,
+                    //   width: 200,
                     //   height: 150,
                     //   child: Text('data'),
                     //   color: Colors.blue[400],
@@ -485,27 +488,42 @@ class ComplicatedImageDemo extends StatelessWidget {
                         Container(
                           width: 90,
                           // color: Colors.red,
-                          child: Image.asset('images/Artboard1.png'),
+                          child: Image.asset('images/p1.png'),
                         ),
                         Container(
                           width: 90,
                           // color: Colors.blue,
-                          child: Image.asset('images/Artboard1.png'),
+                          child: Image.asset('images/p2.png'),
                         ),
                         Container(
                           width: 90,
                           // color: Colors.green,
-                          child: Image.asset('images/Artboard1.png'),
+                          child: Image.asset('images/p3.png'),
                         ),
                         Container(
                           width: 90,
                           // color: Colors.yellow,
-                          child: Image.asset('images/Artboard1.png'),
+                          child: Image.asset('images/p4.png'),
                         ),
                         Container(
                           width: 90,
                           // color: Colors.orange,
-                          child: Image.asset('images/Artboard1.png'),
+                          child: Image.asset('images/p5.png'),
+                        ),
+                        Container(
+                          width: 90,
+                          // color: Colors.orange,
+                          child: Image.asset('images/p6.png'),
+                        ),
+                        Container(
+                          width: 90,
+                          // color: Colors.orange,
+                          child: Image.asset('images/p7.png'),
+                        ),
+                        Container(
+                          width: 90,
+                          // color: Colors.orange,
+                          child: Image.asset('images/p8.png'),
                         ),
                       ],
 
