@@ -7,13 +7,23 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/src/rendering/box.dart';
 import 'package:ionicons/ionicons.dart';
 
-final List<String> imgList = [
-  'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-  'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1519125323398-675f0ddb6208?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-  'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-  'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80',
+final List<List> imgList = [
+  [
+    'https://img.freepik.com/premium-vector/save-world-with-hand-holding-plant-flat-nature-ecology-banner_90099-278.jpg?size=626&ext=jpg',
+    'banners1'
+  ],
+  [
+    'https://img.freepik.com/premium-vector/investment-banner-growing-business-finance_90099-284.jpg',
+    'banners2'
+  ],
+  [
+    'https://img.freepik.com/premium-vector/hand-hold-earth-yellow-save-world-social-media-cover-banner-template_90099-720.jpg?size=626&ext=jpg',
+    'banners3'
+  ],
+
+  // 'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
+  // 'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+  // 'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80',
 ];
 
 void main() => runApp(CarouselDemoHome());
@@ -29,7 +39,7 @@ class CarouselDemo extends StatelessWidget {
         return MaterialApp(
           initialRoute: '/',
           darkTheme: ThemeData.dark(),
-          themeMode: ThemeMode.values.toList()[value as int],
+          themeMode: ThemeMode.values.toList()[value],
           debugShowCheckedModeBanner: false,
           routes: {
             '/': (ctx) => CarouselDemoHome(),
@@ -74,7 +84,7 @@ final List<Widget> imageSliders = imgList
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
                 child: Stack(
                   children: <Widget>[
-                    Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                    Image.network(item[0], fit: BoxFit.cover, width: 1000.0),
                     Positioned(
                       bottom: 0.0,
                       left: 0.0,
@@ -93,7 +103,8 @@ final List<Widget> imageSliders = imgList
                         padding: EdgeInsets.symmetric(
                             vertical: 10.0, horizontal: 20.0),
                         child: Text(
-                          'No. ${imgList.indexOf(item)} image',
+                          item[1],
+                          // 'No. ${imgList.indexOf(item)} image',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20.6,
@@ -131,7 +142,7 @@ class ComplicatedImageDemo extends StatelessWidget {
             ),
             SafeArea(
               child: Container(
-                color: Color.fromARGB(93, 19, 19, 19),
+                color: Theme.of(context).hoverColor,
                 child: Column(
                   children: [
                     Row(
@@ -168,8 +179,6 @@ class ComplicatedImageDemo extends StatelessWidget {
                                               Text(
                                                 'برداشت',
                                                 style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 255, 255, 255),
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 12),
                                               ),
@@ -216,7 +225,6 @@ class ComplicatedImageDemo extends StatelessWidget {
                                               Text(
                                                 'واریز',
                                                 style: TextStyle(
-                                                    color: Colors.white,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 12),
                                               ),
@@ -264,8 +272,6 @@ class ComplicatedImageDemo extends StatelessWidget {
                                               Text(
                                                 'ماینر',
                                                 style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 255, 255, 255),
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 12),
                                               ),
@@ -317,8 +323,6 @@ class ComplicatedImageDemo extends StatelessWidget {
                                               Text(
                                                 'پلن ها',
                                                 style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 255, 255, 255),
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 12),
                                               ),
@@ -365,8 +369,6 @@ class ComplicatedImageDemo extends StatelessWidget {
                                               Text(
                                                 'تاریخچه',
                                                 style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 255, 255, 255),
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 12),
                                               ),
@@ -414,8 +416,6 @@ class ComplicatedImageDemo extends StatelessWidget {
                                               Text(
                                                 'کسب دارمد',
                                                 style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 255, 255, 255),
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 12),
                                               ),
@@ -461,8 +461,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
                     'پلن ها',
-                    style: TextStyle(
-                        color: Colors.grey[100], fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 // Expanded(
@@ -480,54 +479,57 @@ class ComplicatedImageDemo extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: SizedBox(
-                    height: 160,
-                    child: ListView(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        Container(
-                          width: 90,
-                          // color: Colors.red,
-                          child: Image.asset('images/p1.png'),
-                        ),
-                        Container(
-                          width: 90,
-                          // color: Colors.blue,
-                          child: Image.asset('images/p2.png'),
-                        ),
-                        Container(
-                          width: 90,
-                          // color: Colors.green,
-                          child: Image.asset('images/p3.png'),
-                        ),
-                        Container(
-                          width: 90,
-                          // color: Colors.yellow,
-                          child: Image.asset('images/p4.png'),
-                        ),
-                        Container(
-                          width: 90,
-                          // color: Colors.orange,
-                          child: Image.asset('images/p5.png'),
-                        ),
-                        Container(
-                          width: 90,
-                          // color: Colors.orange,
-                          child: Image.asset('images/p6.png'),
-                        ),
-                        Container(
-                          width: 90,
-                          // color: Colors.orange,
-                          child: Image.asset('images/p7.png'),
-                        ),
-                        Container(
-                          width: 90,
-                          // color: Colors.orange,
-                          child: Image.asset('images/p8.png'),
-                        ),
-                      ],
+                    height: 210,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: ListView(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          Container(
+                            width: MediaQuery.sizeOf(context).width * .30,
+                            // color: Colors.red,
+                            child: Image.asset('images/p1.png'),
+                          ),
+                          Container(
+                            width: MediaQuery.sizeOf(context).width * .30,
+                            // color: Colors.blue,
+                            child: Image.asset('images/p2.png'),
+                          ),
+                          Container(
+                            width: MediaQuery.sizeOf(context).width * .30,
+                            // color: Colors.green,
+                            child: Image.asset('images/p3.png'),
+                          ),
+                          Container(
+                            width: MediaQuery.sizeOf(context).width * .30,
+                            // color: Colors.yellow,
+                            child: Image.asset('images/p4.png'),
+                          ),
+                          Container(
+                            width: MediaQuery.sizeOf(context).width * .30,
+                            // color: Colors.orange,
+                            child: Image.asset('images/p5.png'),
+                          ),
+                          Container(
+                            width: MediaQuery.sizeOf(context).width * .30,
+                            // color: Colors.orange,
+                            child: Image.asset('images/p6.png'),
+                          ),
+                          Container(
+                            width: MediaQuery.sizeOf(context).width * .30,
+                            // color: Colors.orange,
+                            child: Image.asset('images/p7.png'),
+                          ),
+                          Container(
+                            width: MediaQuery.sizeOf(context).width * .30,
+                            // color: Colors.orange,
+                            child: Image.asset('images/p8.png'),
+                          ),
+                        ],
 
-                      // itemCount: products.length,
+                        // itemCount: products.length,
+                      ),
                     ),
                   ),
                 ),
@@ -553,9 +555,8 @@ class ComplicatedImageDemo extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
-                    'پلن ها',
-                    style: TextStyle(
-                        color: Colors.grey[100], fontWeight: FontWeight.bold),
+                    'اعلان ها',
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
 
