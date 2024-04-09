@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/src/rendering/box.dart';
@@ -29,6 +30,7 @@ final List<List> imgList = [
 void main() => runApp(CarouselDemoHome());
 
 final themeMode = ValueNotifier(2);
+var isDark = true;
 
 class CarouselDemo extends StatelessWidget {
   //firstpage
@@ -55,12 +57,25 @@ class CarouselDemo extends StatelessWidget {
 class CarouselDemoHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    if (themeMode.value == 1) {
+      isDark = false;
+    } else {
+      isDark = true;
+    }
     return Scaffold(
         appBar: AppBar(
-          title: Text('Rambit'),
+          title: Text('ThemeMode.system'),
           actions: [
             IconButton(
-                icon: Icon(Icons.nightlight_round),
+                icon: Icon(
+                  isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+                  size: 20,
+                ),
+                onPressed: () {
+                  themeMode.value = themeMode.value == 1 ? 2 : 1;
+                }),
+            IconButton(
+                icon: Icon(Icons.menu_rounded),
                 onPressed: () {
                   themeMode.value = themeMode.value == 1 ? 2 : 1;
                 })
@@ -559,15 +574,176 @@ class ComplicatedImageDemo extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
-
-                // Expanded(
-                //   child: Divider(
-                //     thickness: 0.5,
-                //     color: Colors.grey[400],
-                //   ),
-                // ),
               ],
             ),
+            SizedBox(
+              height: 0.0,
+            ),
+            Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 25,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.50,
+                                    child: Text(
+                                        textDirection: TextDirection.rtl,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                        // overflow: TextOverflow.values.first,
+                                        'قیمت بیت کوین و اتریوم امروز سه‌شنبه'),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.50,
+                                      height: 65,
+                                      child: Text(
+                                          textDirection: TextDirection.rtl,
+                                          textAlign: TextAlign.justify,
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                          ),
+                                          ('امروز در بازار قیمت بیت کوین ریزش را تجربه کرده است و به ۷۱,۲۲۳ (هفتاد و یک هزار و دویست و بیست و سه ) دلار رسید که نسبت به روز قبل ، کاهش ۰.۳۶ درصدی داشته است.'))),
+                                ],
+                              )
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                height: 100,
+                                child: Image.network(
+                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrJWR0ndLJ14knzqxlbF5YjIUI_EOBG20XddLkXzjVGw&s',
+                                  // scale: 5,
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.50,
+                                    child: Text(
+                                        textDirection: TextDirection.rtl,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                        // overflow: TextOverflow.values.first,
+                                        'قیمت بیت کوین و اتریوم امروز سه‌شنبه'),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.50,
+                                      child: Text(
+                                          textDirection: TextDirection.rtl,
+                                          textAlign: TextAlign.justify,
+                                          // overflow: TextOverflow.fade,
+                                          style: TextStyle(fontSize: 10),
+                                          ('امروز در بازار قیمت بیت کوین ریزش را تجربه کرده است و به ۷۱,۲۲۳ (هفتاد و یک هزار و دویست و بیست و سه ) دلار رسید که نسبت به روز قبل ، کاهش ۰.۳۶ درصدی داشته است.'))),
+                                ],
+                              )
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                height: 100,
+                                child: Image.network(
+                                  'https://pbs.twimg.com/profile_images/1724435354910851072/VgcKSi5J_400x400.jpg',
+                                  // scale: 5,
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.50,
+                                    child: Text(
+                                        textDirection: TextDirection.rtl,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                        // overflow: TextOverflow.values.first,
+                                        'قیمت بیت کوین و اتریوم امروز سه‌شنبه'),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.50,
+                                      child: Text(
+                                          textDirection: TextDirection.rtl,
+                                          textAlign: TextAlign.justify,
+                                          // overflow: TextOverflow.fade,
+                                          style: TextStyle(fontSize: 10),
+                                          ('امروز در بازار قیمت بیت کوین ریزش را تجربه کرده است و به ۷۱,۲۲۳ (هفتاد و یک هزار و دویست و بیست و سه ) دلار رسید که نسبت به روز قبل ، کاهش ۰.۳۶ درصدی داشته است.'))),
+                                ],
+                              )
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                height: 100,
+                                child: Image.network(
+                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsP9NeKIscFqpdu0HrTmpfrpMmC4YIQ2cxyQ7NhB_eoQ&s',
+                                  // scale: 5,
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ))
           ],
         ),
       ),
