@@ -6,7 +6,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/src/rendering/box.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:com_ramabit_www/menu.dart';
 
 final List<List> imgList = [
   [
@@ -39,14 +41,20 @@ class CarouselDemo extends StatelessWidget {
     return ValueListenableBuilder(
       builder: (context, value, g) {
         return MaterialApp(
-          initialRoute: '/',
           darkTheme: ThemeData.dark(),
           themeMode: ThemeMode.values.toList()[value],
           debugShowCheckedModeBanner: false,
-          routes: {
-            '/': (ctx) => CarouselDemoHome(),
-            '/complicated': (ctx) => ComplicatedImageDemo(),
-          },
+          localizationsDelegates: const [
+            GlobalCupertinoLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale("fa", "IR"), // OR Locale('ar', 'AE') OR Other RTL locales
+          ],
+          locale: const Locale(
+              "fa", "IR"), // OR Locale('ar', 'AE') OR Other RTL locales,
+          home: CarouselDemoHome(),
         );
       },
       valueListenable: themeMode,
@@ -63,6 +71,7 @@ class CarouselDemoHome extends StatelessWidget {
       isDark = true;
     }
     return Scaffold(
+        drawer: Menu(),
         appBar: AppBar(
           title: Text('ThemeMode.system'),
           actions: [
@@ -74,11 +83,6 @@ class CarouselDemoHome extends StatelessWidget {
                 onPressed: () {
                   themeMode.value = themeMode.value == 1 ? 2 : 1;
                 }),
-            IconButton(
-                icon: Icon(Icons.menu_rounded),
-                onPressed: () {
-                  themeMode.value = themeMode.value == 1 ? 2 : 1;
-                })
           ],
         ),
         body: ComplicatedImageDemo()
