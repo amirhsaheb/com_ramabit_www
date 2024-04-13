@@ -3,11 +3,12 @@ import 'package:com_ramabit_www/activity1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 // ignore: library_prefixes
-import 'package:com_ramabit_www/page1.dart';
+import 'package:com_ramabit_www/balance.dart';
 import 'package:com_ramabit_www/menu.dart';
 import 'package:com_ramabit_www/LoginPage.dart';
 import 'package:com_ramabit_www/activity1.dart';
 import 'package:com_ramabit_www/balances.dart';
+import 'package:com_ramabit_www/profile.dart' as profile;
 
 /// Flutter code sample for [AppBar].
 
@@ -28,6 +29,8 @@ class AppBarApp extends StatelessWidget {
               '/index': (context) => CarouselDemoHome(),
               '/second': (context) => const FirstScreen(),
               '/balances': (context) => const Balances(),
+              '/balances/1': (context) => const FirstScreen(),
+              '/profile': (context) => const profile.FirstScreen(),
             },
             debugShowCheckedModeBanner: false,
             localizationsDelegates: const [

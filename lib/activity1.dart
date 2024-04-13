@@ -12,15 +12,15 @@ import 'package:com_ramabit_www/menu.dart';
 
 final List<List> imgList = [
   [
-    'https://img.freepik.com/premium-vector/save-world-with-hand-holding-plant-flat-nature-ecology-banner_90099-278.jpg?size=626&ext=jpg',
+    'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
     'banners1'
   ],
   [
-    'https://img.freepik.com/premium-vector/investment-banner-growing-business-finance_90099-284.jpg',
+    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
     'banners2'
   ],
   [
-    'https://img.freepik.com/premium-vector/hand-hold-earth-yellow-save-world-social-media-cover-banner-template_90099-720.jpg?size=626&ext=jpg',
+    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80',
     'banners3'
   ],
 

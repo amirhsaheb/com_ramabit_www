@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+
 // import 'package:com_ramabit_www/node.dart';
 
 void main() async => runApp(const Menu());
@@ -21,7 +22,7 @@ class Menu extends StatefulWidget {
 class MyMenu extends State<Menu> {
   var client = http.Client();
   var user = '';
-
+  var plansub = false;
   @override
   void initState() {
     _getUser();
@@ -31,9 +32,10 @@ class MyMenu extends State<Menu> {
 
   _getUser() async {
     user = '';
-    var response = json.decode(
-        (await client.get(Uri.parse('https://reqres.in/api/users/2'))).body);
-    user = response['data']['first_name'];
+    // var response = json.decode(
+    //     (await client.get(Uri.parse('https://reqres.in/api/users/2'))).body);
+    // user = response['data']['first_name'];
+    user = 'javd';
     setState(() {});
   }
 
@@ -160,7 +162,10 @@ class MyMenu extends State<Menu> {
                                           Row(
                                             children: [
                                               TextButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  Navigator.pushNamed(
+                                                      context, '/profile');
+                                                },
                                                 child: Wrap(
                                                   children: [
                                                     Icon(
@@ -186,7 +191,17 @@ class MyMenu extends State<Menu> {
                                           Row(
                                             children: [
                                               TextButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  setState(() {
+                                                    if (plansub == true) {
+                                                      plansub = false;
+                                                    } else {
+                                                      {
+                                                        plansub = true;
+                                                      }
+                                                    }
+                                                  });
+                                                },
                                                 child: Wrap(
                                                   children: [
                                                     Icon(
@@ -207,6 +222,82 @@ class MyMenu extends State<Menu> {
                                                         'پلن ها'),
                                                   ],
                                                 ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                child:
+                                                    Builder(builder: (context) {
+                                                  if (plansub)
+                                                    return TextButton(
+                                                      onPressed: () {},
+                                                      child: Wrap(
+                                                        children: [
+                                                          Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      top: 0,
+                                                                      right:
+                                                                          20)),
+                                                          Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      top: 0,
+                                                                      right:
+                                                                          10)),
+                                                          Text(
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 18,
+                                                                  fontFamily:
+                                                                      'sansir'),
+                                                              'خرید پلن'),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  return Wrap();
+                                                }),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                child:
+                                                    Builder(builder: (context) {
+                                                  if (plansub)
+                                                    return TextButton(
+                                                      onPressed: () {},
+                                                      child: Wrap(
+                                                        children: [
+                                                          Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      top: 0,
+                                                                      right:
+                                                                          20)),
+                                                          Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      top: 0,
+                                                                      right:
+                                                                          10)),
+                                                          Text(
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 18,
+                                                                  fontFamily:
+                                                                      'sansir'),
+                                                              'پلن های من'),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  return Wrap();
+                                                }),
                                               )
                                             ],
                                           ),

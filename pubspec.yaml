@@ -18,6 +18,8 @@ dependencies:
   bootstrap_icons: ^1.11.3
   google_fonts: ^6.2.1
   ionicons: ^0.2.2
+  syncfusion_flutter_charts: ^25.1.39+1
+  fl_chart: ^0.67.0
 
 dev_dependencies:
   flutter_test:
