@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 // ignore: library_prefixes
 import 'package:com_ramabit_www/balance.dart';
-import 'package:com_ramabit_www/menu.dart';
 import 'package:com_ramabit_www/LoginPage.dart';
-import 'package:com_ramabit_www/activity1.dart';
 import 'package:com_ramabit_www/balances.dart';
 import 'package:com_ramabit_www/profile.dart' as profile;
 import 'package:com_ramabit_www/MyPlans.dart' as myplans;
@@ -16,6 +14,10 @@ import 'package:com_ramabit_www/deposwallet.dart' as depos;
 import 'package:com_ramabit_www/history.dart' as history;
 import 'package:com_ramabit_www/transaction.dart' as trans;
 import 'package:com_ramabit_www/myloginpage.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+// Create storage
+final storage = new FlutterSecureStorage();
 
 /// Flutter code sample for [AppBar].
 
@@ -31,7 +33,7 @@ class AppBarApp extends StatelessWidget {
         return MaterialApp(
             darkTheme: ThemeData.dark(),
             themeMode: ThemeMode.values.toList()[value],
-            initialRoute: '/log2',
+            initialRoute: '/log',
             routes: {
               '/index': (context) => CarouselDemoHome(),
               '/second': (context) => const FirstScreen(),

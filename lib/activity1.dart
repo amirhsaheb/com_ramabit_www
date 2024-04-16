@@ -1,11 +1,5 @@
-import 'dart:math';
-
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter/src/rendering/box.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:com_ramabit_www/menu.dart';
@@ -29,12 +23,14 @@ final List<List> imgList = [
   // 'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80',
 ];
 
-void main() => runApp(CarouselDemoHome());
+void main() => runApp(const CarouselDemoHome());
 
 final themeMode = ValueNotifier(2);
 var isDark = true;
 
 class CarouselDemo extends StatelessWidget {
+  const CarouselDemo({super.key});
+
   //firstpage
   @override
   Widget build(BuildContext context) {
@@ -54,7 +50,7 @@ class CarouselDemo extends StatelessWidget {
           ],
           locale: const Locale(
               "fa", "IR"), // OR Locale('ar', 'AE') OR Other RTL locales,
-          home: CarouselDemoHome(),
+          home: const CarouselDemoHome(),
         );
       },
       valueListenable: themeMode,
@@ -63,6 +59,8 @@ class CarouselDemo extends StatelessWidget {
 }
 
 class CarouselDemoHome extends StatelessWidget {
+  const CarouselDemoHome({super.key});
+
   @override
   Widget build(BuildContext context) {
     if (themeMode.value == 1) {
@@ -71,9 +69,9 @@ class CarouselDemoHome extends StatelessWidget {
       isDark = true;
     }
     return Scaffold(
-        drawer: Menu(),
+        drawer: const Menu(),
         appBar: AppBar(
-          title: Text('ThemeMode.system'),
+          title: const Text('ThemeMode.system'),
           actions: [
             IconButton(
                 icon: Icon(
@@ -97,44 +95,42 @@ class CarouselDemoHome extends StatelessWidget {
 
 final List<Widget> imageSliders = imgList
     .map((item) => Container(
-          child: Container(
-            margin: EdgeInsets.all(5.0),
-            child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                child: Stack(
-                  children: <Widget>[
-                    Image.network(item[0], fit: BoxFit.cover, width: 1000.0),
-                    Positioned(
-                      bottom: 0.0,
-                      left: 0.0,
-                      right: 0.0,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Color.fromARGB(200, 0, 0, 0),
-                              Color.fromARGB(0, 0, 0, 0)
-                            ],
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
-                          ),
+          margin: const EdgeInsets.all(5.0),
+          child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+              child: Stack(
+                children: <Widget>[
+                  Image.network(item[0], fit: BoxFit.cover, width: 1000.0),
+                  Positioned(
+                    bottom: 0.0,
+                    left: 0.0,
+                    right: 0.0,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Color.fromARGB(200, 0, 0, 0),
+                            Color.fromARGB(0, 0, 0, 0)
+                          ],
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
                         ),
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
-                        child: Text(
-                          item[1],
-                          // 'No. ${imgList.indexOf(item)} image',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.6,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 20.0),
+                      child: Text(
+                        item[1],
+                        // 'No. ${imgList.indexOf(item)} image',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.6,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                  ],
-                )),
-          ),
+                  ),
+                ],
+              )),
         ))
     .toList();
 
@@ -156,7 +152,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                 items: imageSliders,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             SafeArea(
@@ -473,11 +469,11 @@ class ComplicatedImageDemo extends StatelessWidget {
                     color: Colors.grey[400],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
                     'پلن ها',
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -491,7 +487,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                 // ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 0,
             ),
             Row(
@@ -568,11 +564,11 @@ class ComplicatedImageDemo extends StatelessWidget {
                     color: Colors.grey[400],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
                     'اعلان ها',
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -580,11 +576,12 @@ class ComplicatedImageDemo extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 0.0,
             ),
             Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: Column(
                   children: [
                     Padding(
@@ -600,7 +597,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                                     height: 25,
                                     width: MediaQuery.of(context).size.width *
                                         0.50,
-                                    child: Text(
+                                    child: const Text(
                                         textDirection: TextDirection.rtl,
                                         style: TextStyle(
                                             fontSize: 12,
@@ -616,7 +613,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                                       width: MediaQuery.of(context).size.width *
                                           0.50,
                                       height: 65,
-                                      child: Text(
+                                      child: const Text(
                                           textDirection: TextDirection.rtl,
                                           textAlign: TextAlign.justify,
                                           style: TextStyle(
@@ -654,7 +651,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                                   Container(
                                     width: MediaQuery.of(context).size.width *
                                         0.50,
-                                    child: Text(
+                                    child: const Text(
                                         textDirection: TextDirection.rtl,
                                         style: TextStyle(
                                             fontSize: 12,
@@ -669,7 +666,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                                   Container(
                                       width: MediaQuery.of(context).size.width *
                                           0.50,
-                                      child: Text(
+                                      child: const Text(
                                           textDirection: TextDirection.rtl,
                                           textAlign: TextAlign.justify,
                                           // overflow: TextOverflow.fade,
@@ -706,7 +703,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                                   Container(
                                     width: MediaQuery.of(context).size.width *
                                         0.50,
-                                    child: Text(
+                                    child: const Text(
                                         textDirection: TextDirection.rtl,
                                         style: TextStyle(
                                             fontSize: 12,
@@ -721,7 +718,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                                   Container(
                                       width: MediaQuery.of(context).size.width *
                                           0.50,
-                                      child: Text(
+                                      child: const Text(
                                           textDirection: TextDirection.rtl,
                                           textAlign: TextAlign.justify,
                                           // overflow: TextOverflow.fade,

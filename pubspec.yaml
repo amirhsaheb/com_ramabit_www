@@ -20,6 +20,7 @@ dependencies:
   ionicons: ^0.2.2
   syncfusion_flutter_charts: ^25.1.39+1
   fl_chart: ^0.67.0
+  flutter_secure_storage: ^9.0.0
 
 dev_dependencies:
   flutter_test:

@@ -2,14 +2,31 @@ import 'package:com_ramabit_www/my_button_register_singup.dart';
 import 'package:flutter/material.dart';
 import 'package:com_ramabit_www/my_textfeild.dart';
 import 'package:com_ramabit_www/my_button_login_singin.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:com_ramabit_www/main.dart';
 
+var token = 'aaa';
+
+// ignore: must_be_immutable
 class PageLogin1 extends StatelessWidget {
   PageLogin1({super.key});
 
   final usernamecontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
+  var client = http.Client();
+  // ignore: non_constant_identifier_names
+  void UserSingIn() async {
+    var response = json.decode((await client
+            .post(Uri.parse('http://www.ryanai.ir/api/v1/token/login'), body: {
+      'username': usernamecontroller,
+      'password': passwordcontroller
+    }))
+        .body);
+    token = response['data']['token'];
+    storage.write(key: 'token', value: token);
+  }
 
-  void UserSingIn() {}
   void UserSingup() {}
 
   @override
@@ -37,7 +54,7 @@ class PageLogin1 extends StatelessWidget {
                       )
                     ]),
                 child: Image.asset(
-                  'images/logo.png',
+                  'images/ramlogo.png',
                   height: 90,
                 ),
               ),
@@ -50,7 +67,7 @@ class PageLogin1 extends StatelessWidget {
               SizedBox(
                 height: 15,
               ),
-
+              Text(token),
               //Wellcome back
               Text(
                 'به کایسی خوش آمدید ',

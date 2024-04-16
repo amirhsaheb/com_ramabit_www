@@ -1,11 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:convert';
-import 'package:com_ramabit_www/balances.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 // import 'package:com_ramabit_www/node.dart';
@@ -32,9 +28,9 @@ class MyMenu extends State<Menu> {
 
   _getUser() async {
     user = '';
-    // var response = json.decode(
-    //     (await client.get(Uri.parse('https://reqres.in/api/users/2'))).body);
-    // user = response['data']['first_name'];
+    var response = json.decode(
+        (await client.get(Uri.parse('https://reqres.in/api/users/2'))).body);
+    user = response['data']['first_name'];
     user = 'javd';
     setState(() {});
   }
@@ -44,13 +40,13 @@ class MyMenu extends State<Menu> {
     // SystemChrome.setSystemUIOverlayStyle(Status)
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.only(top: 0),
+        padding: const EdgeInsets.only(top: 0),
         child: Drawer(
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(0)),
             ),
             width: 250,
-            backgroundColor: Color.fromARGB(255, 38, 37, 30),
+            backgroundColor: const Color.fromARGB(255, 38, 37, 30),
             child: ListView(children: [
               Column(
                 children: [
@@ -60,9 +56,9 @@ class MyMenu extends State<Menu> {
                           padding: const EdgeInsets.only(top: 16, right: 20),
                           child: Row(
                             children: [
-                              Column(
+                              const Column(
                                 children: [
-                                  const CircleAvatar(
+                                  CircleAvatar(
                                       backgroundImage:
                                           AssetImage('images/man.png')),
                                 ],
@@ -81,10 +77,10 @@ class MyMenu extends State<Menu> {
                                           user),
                                     ],
                                   ),
-                                  Row(
+                                  const Row(
                                     children: [
                                       Text(
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 12,
                                               fontFamily: 'sansir'),
@@ -101,7 +97,7 @@ class MyMenu extends State<Menu> {
                   Row(
                     children: [
                       Padding(
-                          padding: EdgeInsets.only(top: 0, right: 0),
+                          padding: const EdgeInsets.only(top: 0, right: 0),
                           child: Column(
                             children: [
                               Row(
@@ -118,7 +114,7 @@ class MyMenu extends State<Menu> {
                                                   Navigator.pushNamed(
                                                       context, '/index');
                                                 },
-                                                child: Wrap(children: [
+                                                child: const Wrap(children: [
                                                   Icon(
                                                       color: Colors.white,
                                                       Icons.home),
@@ -166,7 +162,7 @@ class MyMenu extends State<Menu> {
                                                   Navigator.pushNamed(
                                                       context, '/profile');
                                                 },
-                                                child: Wrap(
+                                                child: const Wrap(
                                                   children: [
                                                     Icon(
                                                         color: Colors.white,
@@ -202,7 +198,7 @@ class MyMenu extends State<Menu> {
                                                     }
                                                   });
                                                 },
-                                                child: Wrap(
+                                                child: const Wrap(
                                                   children: [
                                                     Icon(
                                                         color: Colors.white,
@@ -227,44 +223,38 @@ class MyMenu extends State<Menu> {
                                           ),
                                           Row(
                                             children: [
-                                              Container(
-                                                child:
-                                                    Builder(builder: (context) {
-                                                  if (plansub)
-                                                    return TextButton(
-                                                      onPressed: () {
-                                                        Navigator.pushNamed(
-                                                            context,
-                                                            '/buyplans');
-                                                      },
-                                                      child: Wrap(
-                                                        children: [
-                                                          Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      top: 0,
-                                                                      right:
-                                                                          20)),
-                                                          Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      top: 0,
-                                                                      right:
-                                                                          10)),
-                                                          Text(
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 18,
-                                                                  fontFamily:
-                                                                      'sansir'),
-                                                              'خرید پلن'),
-                                                        ],
-                                                      ),
-                                                    );
-                                                  return Wrap();
-                                                }),
-                                              )
+                                              Builder(builder: (context) {
+                                                if (plansub)
+                                                  return TextButton(
+                                                    onPressed: () {
+                                                      Navigator.pushNamed(
+                                                          context, '/buyplans');
+                                                    },
+                                                    child: const Wrap(
+                                                      children: [
+                                                        Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    top: 0,
+                                                                    right: 20)),
+                                                        Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    top: 0,
+                                                                    right: 10)),
+                                                        Text(
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 18,
+                                                                fontFamily:
+                                                                    'sansir'),
+                                                            'خرید پلن'),
+                                                      ],
+                                                    ),
+                                                  );
+                                                return const Wrap();
+                                              })
                                             ],
                                           ),
                                           Row(
@@ -279,7 +269,7 @@ class MyMenu extends State<Menu> {
                                                             context,
                                                             '/myplans');
                                                       },
-                                                      child: Wrap(
+                                                      child: const Wrap(
                                                         children: [
                                                           Padding(
                                                               padding: EdgeInsets
@@ -304,7 +294,7 @@ class MyMenu extends State<Menu> {
                                                         ],
                                                       ),
                                                     );
-                                                  return Wrap();
+                                                  return const Wrap();
                                                 }),
                                               )
                                             ],
@@ -315,7 +305,7 @@ class MyMenu extends State<Menu> {
                                                   Navigator.pushNamed(
                                                       context, '/balances');
                                                 },
-                                                child: Wrap(
+                                                child: const Wrap(
                                                   children: [
                                                     Icon(
                                                         color: Colors.white,
@@ -339,7 +329,7 @@ class MyMenu extends State<Menu> {
                                             children: [
                                               TextButton(
                                                 onPressed: () {},
-                                                child: Wrap(
+                                                child: const Wrap(
                                                   children: [
                                                     Icon(
                                                         color: Colors.white,
@@ -368,7 +358,7 @@ class MyMenu extends State<Menu> {
                                                   Navigator.pushNamed(
                                                       context, '/charge');
                                                 },
-                                                child: Wrap(
+                                                child: const Wrap(
                                                   children: [
                                                     Icon(
                                                         color: Colors.white,
@@ -398,7 +388,7 @@ class MyMenu extends State<Menu> {
                                                   Navigator.pushNamed(
                                                       context, '/depos');
                                                 },
-                                                child: Wrap(
+                                                child: const Wrap(
                                                   children: [
                                                     Icon(
                                                         color: Colors.white,
@@ -427,7 +417,7 @@ class MyMenu extends State<Menu> {
                                                   Navigator.pushNamed(
                                                       context, '/history');
                                                 },
-                                                child: Wrap(
+                                                child: const Wrap(
                                                   children: [
                                                     Icon(
                                                         color: Colors.white,
@@ -457,7 +447,7 @@ class MyMenu extends State<Menu> {
                                                   Navigator.pushNamed(
                                                       context, '/trans');
                                                 },
-                                                child: Wrap(
+                                                child: const Wrap(
                                                   children: [
                                                     Icon(
                                                         color: Colors.white,
@@ -483,7 +473,7 @@ class MyMenu extends State<Menu> {
                                             children: [
                                               TextButton(
                                                 onPressed: () {},
-                                                child: Wrap(
+                                                child: const Wrap(
                                                   children: [
                                                     Icon(
                                                         color: Colors.white,
@@ -511,7 +501,7 @@ class MyMenu extends State<Menu> {
                                             children: [
                                               TextButton(
                                                 onPressed: () {},
-                                                child: Wrap(
+                                                child: const Wrap(
                                                   children: [
                                                     Icon(
                                                         color: Colors.white,
@@ -534,7 +524,7 @@ class MyMenu extends State<Menu> {
                                               )
                                             ],
                                           ),
-                                          Divider(
+                                          const Divider(
                                             color: Color.fromARGB(0, 0, 0, 0),
                                             height: 30,
                                           ),
@@ -542,7 +532,7 @@ class MyMenu extends State<Menu> {
                                             children: [
                                               TextButton(
                                                 onPressed: () {},
-                                                child: Wrap(
+                                                child: const Wrap(
                                                   children: [
                                                     Icon(
                                                         color: Colors.white,
