@@ -5,12 +5,14 @@ class MyTextFeild extends StatelessWidget {
   final String hinttext;
   final bool secretpass;
 
-  const MyTextFeild({
-    super.key,
-    this.controller,
-    required this.hinttext,
-    required this.secretpass,
-  });
+  final TextInputType numb;
+
+  const MyTextFeild(
+      {super.key,
+      this.controller,
+      required this.hinttext,
+      required this.secretpass,
+      this.numb = TextInputType.text});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class MyTextFeild extends StatelessWidget {
         textAlign: TextAlign.center,
         // style:,
         // style: TextStyle(fontSize: null),
-        keyboardType: TextInputType.number,
+        keyboardType: numb,
         controller: controller,
         obscureText: secretpass,
         decoration: InputDecoration(

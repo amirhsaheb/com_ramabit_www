@@ -46,52 +46,128 @@ class FirstScreen extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: SizedBox(
-                  height: 210,
+                  height: MediaQuery.of(context).size.height * 0.06,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
                     child: ListView(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       children: [
                         Container(
-                          width: MediaQuery.sizeOf(context).width * .30,
+                          width: MediaQuery.sizeOf(context).width * .19,
                           // color: Colors.red,
-                          child: Image.asset('images/p1.png'),
+                          child: Row(
+                            children: [
+                              Container(
+                                  child: TextButton(
+                                      onPressed: () {},
+                                      child: Text(
+                                        'همه',
+                                        style: TextStyle(color: Colors.white),
+                                      )),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Color.fromARGB(255, 42, 42, 42),
+                                      border: Border(
+                                        left: BorderSide(
+                                          // color: Colors.green,
+                                          width: 1,
+                                        ),
+                                      )))
+                            ],
+                          ),
                         ),
                         Container(
-                          width: MediaQuery.sizeOf(context).width * .30,
+                          width: MediaQuery.sizeOf(context).width * .19,
                           // color: Colors.blue,
-                          child: Image.asset('images/p2.png'),
+                          child: Row(
+                            children: [
+                              Container(
+                                  child: TextButton(
+                                      onPressed: () {},
+                                      child: Text('1ماهه',
+                                          style:
+                                              TextStyle(color: Colors.white))),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.green,
+                                      border: Border(
+                                        left: BorderSide(
+                                          // color: Colors.green,
+                                          width: 1,
+                                        ),
+                                      )))
+                            ],
+                          ),
                         ),
                         Container(
-                          width: MediaQuery.sizeOf(context).width * .30,
+                          width: MediaQuery.sizeOf(context).width * .19,
                           // color: Colors.green,
-                          child: Image.asset('images/p3.png'),
+                          child: Row(
+                            children: [
+                              Container(
+                                  child: TextButton(
+                                      onPressed: () {},
+                                      child: Text('3ماهه',
+                                          style:
+                                              TextStyle(color: Colors.white))),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.green,
+                                      border: Border(
+                                        left: BorderSide(
+                                          // color: Colors.green,
+                                          width: 1,
+                                        ),
+                                      )))
+                            ],
+                          ),
                         ),
                         Container(
-                          width: MediaQuery.sizeOf(context).width * .30,
+                          width: MediaQuery.sizeOf(context).width * .19,
                           // color: Colors.yellow,
-                          child: Image.asset('images/p4.png'),
+                          child: Row(
+                            children: [
+                              Container(
+                                  child: TextButton(
+                                      onPressed: () {},
+                                      child: Text('6ماهه',
+                                          style:
+                                              TextStyle(color: Colors.white))),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.green,
+                                      border: Border(
+                                        left: BorderSide(
+                                          // color: Colors.green,
+                                          width: 1,
+                                        ),
+                                      )))
+                            ],
+                          ),
                         ),
                         Container(
-                          width: MediaQuery.sizeOf(context).width * .30,
+                          width: MediaQuery.sizeOf(context).width * .19,
                           // color: Colors.orange,
-                          child: Image.asset('images/p5.png'),
-                        ),
-                        Container(
-                          width: MediaQuery.sizeOf(context).width * .30,
-                          // color: Colors.orange,
-                          child: Image.asset('images/p6.png'),
-                        ),
-                        Container(
-                          width: MediaQuery.sizeOf(context).width * .30,
-                          // color: Colors.orange,
-                          child: Image.asset('images/p7.png'),
-                        ),
-                        Container(
-                          width: MediaQuery.sizeOf(context).width * .30,
-                          // color: Colors.orange,
-                          child: Image.asset('images/p8.png'),
+                          child: Row(
+                            children: [
+                              Container(
+                                  child: TextButton(
+                                      onPressed: () {},
+                                      child: Text('یکساله',
+                                          style:
+                                              TextStyle(color: Colors.white))),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.green,
+                                      border: Border(
+                                        left: BorderSide(
+                                          // color: Colors.green,
+                                          width: 1,
+                                        ),
+                                      )))
+                            ],
+                          ),
                         ),
                       ],
 
@@ -121,7 +197,8 @@ class FirstScreen extends StatelessWidget {
           //               ),
           //             )))
           //   ],
-          // ),
+          // )
+          // ,
           SizedBox(
             height: 5,
           ),
@@ -152,38 +229,62 @@ class FirstScreen extends StatelessWidget {
                                     )
                                   ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    //////dovomi
-                                    children: [
-                                      Padding(
-                                          padding: EdgeInsets.only(
-                                              left: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.6)),
-                                      Row(children: [Text('data')]),
-                                      Row(
-                                        children: [Text('data')],
-                                      )
-                                    ],
-                                  ),
-                                ),
                                 Column(
-                                  //sevomi
-                                  // mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Row(
                                       children: [
-                                        Text(
-                                          '10BTC',
+                                        Container(
+                                          padding: EdgeInsets.only(right: 00),
+                                          child: Text(
+                                            '  پلن یکساله بیتکوین',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20),
+                                          ),
+                                        ),
+                                      ],
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          //////dovomi
+                                          children: [
+                                            Row(children: [Text('سود')]),
+                                            Row(
+                                              children: [Text('قیمت')],
+                                            ),
+                                            Padding(
+                                                padding: EdgeInsets.only(
+                                                    right:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.6)),
+                                          ],
+                                        ),
+                                        Column(
+                                          //sevomi
+                                          // mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  '3%',
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [Text(r"$" + '60,000')],
+                                            )
+                                          ],
                                         ),
                                       ],
                                     ),
-                                    Row(
-                                      children: [Text(r"$" + '60,000')],
-                                    )
                                   ],
                                 )
                               ],

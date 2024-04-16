@@ -37,7 +37,7 @@ class PageLogin extends StatelessWidget {
                       )
                     ]),
                 child: Image.asset(
-                  'images/logo.png',
+                  'images/ramlogo.png',
                   height: 90,
                 ),
               ),
@@ -70,6 +70,7 @@ class PageLogin extends StatelessWidget {
                 controller: usernamecontroller,
                 hinttext: 'نام کاربری',
                 secretpass: false,
+                numb: TextInputType.text,
               ), //username
               SizedBox(
                 height: 10,
@@ -78,6 +79,7 @@ class PageLogin extends StatelessWidget {
                 controller: passwordcontroller,
                 hinttext: 'رمز عبور',
                 secretpass: true,
+                numb: TextInputType.text,
               ), //password
               SizedBox(
                 height: 10,

@@ -14,6 +14,8 @@ import 'package:com_ramabit_www/buyplans.dart' as buyplans;
 import 'package:com_ramabit_www/chargewallet.dart' as chargewallet;
 import 'package:com_ramabit_www/deposwallet.dart' as depos;
 import 'package:com_ramabit_www/history.dart' as history;
+import 'package:com_ramabit_www/transaction.dart' as trans;
+import 'package:com_ramabit_www/myloginpage.dart';
 
 /// Flutter code sample for [AppBar].
 
@@ -29,7 +31,7 @@ class AppBarApp extends StatelessWidget {
         return MaterialApp(
             darkTheme: ThemeData.dark(),
             themeMode: ThemeMode.values.toList()[value],
-            initialRoute: '/index',
+            initialRoute: '/log2',
             routes: {
               '/index': (context) => CarouselDemoHome(),
               '/second': (context) => const FirstScreen(),
@@ -41,6 +43,10 @@ class AppBarApp extends StatelessWidget {
               '/charge': (context) => const chargewallet.FirstScreen(),
               '/depos': (context) => const depos.FirstScreen(),
               '/history': (context) => const history.FirstScreen(),
+              '/trans': (context) => const trans.FirstScreen(),
+              '/reg': (context) => PageRegister(),
+              '/log': (context) => PageLogin1(),
+              '/log2': (context) => PageLogin(),
             },
             debugShowCheckedModeBanner: false,
             localizationsDelegates: const [

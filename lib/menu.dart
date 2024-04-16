@@ -453,7 +453,10 @@ class MyMenu extends State<Menu> {
                                           Row(
                                             children: [
                                               TextButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  Navigator.pushNamed(
+                                                      context, '/trans');
+                                                },
                                                 child: Wrap(
                                                   children: [
                                                     Icon(
