@@ -9,7 +9,7 @@ import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/src/widgets/container.dart';
 
-void main() async => runApp(const Balances());
+void main() async => runApp(const FirstScreen());
 
 class _SalesData {
   _SalesData(this.year, this.sales);
@@ -20,8 +20,8 @@ class _SalesData {
 
 int id = 1;
 
-class Balances extends StatelessWidget {
-  const Balances({super.key});
+class FirstScreen extends StatelessWidget {
+  const FirstScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class Balances extends StatelessWidget {
                       Colors.lightBlue,
                     ],
                     title: const ChartTitle(
-                        text: 'موجودی',
+                        text: 'تاریخچه تراکنش ها',
                         alignment: ChartAlignment.center,
                         textStyle: TextStyle(fontFamily: 'sansir')),
                     series: [
@@ -93,7 +93,7 @@ class Balances extends StatelessWidget {
                       padding:
                           MaterialStateProperty.all(EdgeInsets.only(right: 0))),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/balances/$id');
+                    // Navigator.pushNamed(context, '/history');
                   },
                   // padding: EdgeInsets.all(16),
                   child: Container(
@@ -104,10 +104,90 @@ class Balances extends StatelessWidget {
                             Column(
                               //avali
                               children: [
-                                Image.asset(
-                                  'images/bit.png',
-                                  scale: 50,
+                                Icon(
+                                  Icons.arrow_upward,
+                                  color: Colors.green[800],
                                 )
+                                // Image.asset(
+                                //   'images/bit.png',
+                                //   scale: 50,
+                                // )
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                //////dovomi
+                                children: [
+                                  Padding(
+                                      padding: EdgeInsets.only(
+                                          left: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.6)),
+                                  Row(children: [Text('data')]),
+                                  Row(
+                                    children: [Text('data')],
+                                  )
+                                ],
+                              ),
+                            ),
+                            Column(
+                              //sevomi
+                              // mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      '10BTC',
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [Text(r"$" + '60,000')],
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                    color: Theme.of(context).primaryColorLight,
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Row(
+              children: [
+                TextButton(
+                  style: ButtonStyle(
+                      padding:
+                          MaterialStateProperty.all(EdgeInsets.only(right: 0))),
+                  onPressed: () {
+                    // Navigator.pushNamed(context, '/history');
+                  },
+                  // padding: EdgeInsets.all(16),
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Column(
+                              //avali
+                              children: [
+                                Icon(
+                                  Icons.arrow_downward,
+                                  color: Colors.red[600],
+                                )
+                                // Image.asset(
+                                //   'images/bit.png',
+                                //   scale: 50,
+                                // )
                               ],
                             ),
                             Padding(

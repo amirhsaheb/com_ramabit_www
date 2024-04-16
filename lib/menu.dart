@@ -133,32 +133,32 @@ class MyMenu extends State<Menu> {
                                                       'خانه'),
                                                 ]))
                                           ]),
-                                          Row(
-                                            children: [
-                                              TextButton(
-                                                onPressed: () {},
-                                                child: Wrap(
-                                                  children: [
-                                                    Icon(
-                                                        color: Colors.white,
-                                                        Icons.dashboard),
-                                                    Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                top: 0,
-                                                                right: 10)),
-                                                    Text(
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 18,
-                                                            fontFamily:
-                                                                'sansir'),
-                                                        'داشبورد'),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                          // Row(
+                                          //   children: [
+                                          //     TextButton(
+                                          //       onPressed: () {},
+                                          //       child: Wrap(
+                                          //         children: [
+                                          //           Icon(
+                                          //               color: Colors.white,
+                                          //               Icons.dashboard),
+                                          //           Padding(
+                                          //               padding:
+                                          //                   EdgeInsets.only(
+                                          //                       top: 0,
+                                          //                       right: 10)),
+                                          //           Text(
+                                          //               style: TextStyle(
+                                          //                   color: Colors.white,
+                                          //                   fontSize: 18,
+                                          //                   fontFamily:
+                                          //                       'sansir'),
+                                          //               'داشبورد'),
+                                          //         ],
+                                          //       ),
+                                          //     ),
+                                          //   ],
+                                          // ),
                                           Row(
                                             children: [
                                               TextButton(
@@ -232,7 +232,11 @@ class MyMenu extends State<Menu> {
                                                     Builder(builder: (context) {
                                                   if (plansub)
                                                     return TextButton(
-                                                      onPressed: () {},
+                                                      onPressed: () {
+                                                        Navigator.pushNamed(
+                                                            context,
+                                                            '/buyplans');
+                                                      },
                                                       child: Wrap(
                                                         children: [
                                                           Padding(
@@ -270,7 +274,11 @@ class MyMenu extends State<Menu> {
                                                     Builder(builder: (context) {
                                                   if (plansub)
                                                     return TextButton(
-                                                      onPressed: () {},
+                                                      onPressed: () {
+                                                        Navigator.pushNamed(
+                                                            context,
+                                                            '/myplans');
+                                                      },
                                                       child: Wrap(
                                                         children: [
                                                           Padding(
@@ -356,7 +364,10 @@ class MyMenu extends State<Menu> {
                                           Row(
                                             children: [
                                               TextButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  Navigator.pushNamed(
+                                                      context, '/charge');
+                                                },
                                                 child: Wrap(
                                                   children: [
                                                     Icon(
@@ -383,7 +394,10 @@ class MyMenu extends State<Menu> {
                                           Row(
                                             children: [
                                               TextButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  Navigator.pushNamed(
+                                                      context, '/depos');
+                                                },
                                                 child: Wrap(
                                                   children: [
                                                     Icon(
@@ -409,7 +423,10 @@ class MyMenu extends State<Menu> {
                                           Row(
                                             children: [
                                               TextButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  Navigator.pushNamed(
+                                                      context, '/history');
+                                                },
                                                 child: Wrap(
                                                   children: [
                                                     Icon(

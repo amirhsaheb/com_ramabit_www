@@ -9,6 +9,11 @@ import 'package:com_ramabit_www/LoginPage.dart';
 import 'package:com_ramabit_www/activity1.dart';
 import 'package:com_ramabit_www/balances.dart';
 import 'package:com_ramabit_www/profile.dart' as profile;
+import 'package:com_ramabit_www/MyPlans.dart' as myplans;
+import 'package:com_ramabit_www/buyplans.dart' as buyplans;
+import 'package:com_ramabit_www/chargewallet.dart' as chargewallet;
+import 'package:com_ramabit_www/deposwallet.dart' as depos;
+import 'package:com_ramabit_www/history.dart' as history;
 
 /// Flutter code sample for [AppBar].
 
@@ -31,6 +36,11 @@ class AppBarApp extends StatelessWidget {
               '/balances': (context) => const Balances(),
               '/balances/1': (context) => const FirstScreen(),
               '/profile': (context) => const profile.FirstScreen(),
+              '/myplans': (context) => const myplans.FirstScreen(),
+              '/buyplans': (context) => const buyplans.FirstScreen(),
+              '/charge': (context) => const chargewallet.FirstScreen(),
+              '/depos': (context) => const depos.FirstScreen(),
+              '/history': (context) => const history.FirstScreen(),
             },
             debugShowCheckedModeBanner: false,
             localizationsDelegates: const [
