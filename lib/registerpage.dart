@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:com_ramabit_www/my_textfeild.dart';
 // import 'package:com_ramabit_www/my_button_login_singin.dart';
+import 'package:com_ramabit_www/my_button_register_singup.dart';
 import 'package:flutter/widgets.dart';
 
 class PageRegister extends StatelessWidget {
@@ -134,6 +135,26 @@ class PageRegister extends StatelessWidget {
 
               const SizedBox(
                 height: 15,
+              ),
+
+              TextButton(
+                onPressed: () => "",
+                child: Container(
+                  padding: const EdgeInsets.all(5.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: BoxDecoration(
+                      color: Color(0xFFFFD700),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Center(
+                    child: Text(
+                      'ثبت نام',
+                      style: TextStyle(
+                          color: Colors.grey[800],
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                    ),
+                  ),
+                ),
               ),
 
               // MyButtonSingup(

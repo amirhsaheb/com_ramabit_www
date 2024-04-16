@@ -1,6 +1,7 @@
+import 'package:com_ramabit_www/my_button_register_singup.dart';
 import 'package:flutter/material.dart';
 import 'package:com_ramabit_www/my_textfeild.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:com_ramabit_www/my_button_login_singin.dart';
 
 class PageLogin extends StatelessWidget {
   PageLogin({super.key});
@@ -8,37 +9,45 @@ class PageLogin extends StatelessWidget {
   final usernamecontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
 
-  void usersingin() {}
-  void usersingup() {}
+  void UserSingIn() {}
+  void UserSingup() {}
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      localizationsDelegates: [
-        GlobalCupertinoLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: [
-        Locale("fa", "IR"), // OR Locale('ar', 'AE') OR Other RTL locales
-      ],
-      locale: Locale("fa", "IR"),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.grey[900],
         body: SafeArea(
           child: Center(
             child: Column(children: <Widget>[
-              const SizedBox(
+              SizedBox(
                 height: 30,
               ),
               //LOGO
-              const Icon(
-                color: Color(0xFFFFD700),
-                Icons.lock,
-                size: 100,
+              Container(
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 67, 68, 68),
+                    borderRadius: BorderRadius.circular(50),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0xFFFFD700),
+                        blurRadius: 100,
+                        offset: Offset(4, 8),
+                      )
+                    ]),
+                child: Image.asset(
+                  'images/logo.png',
+                  height: 90,
+                ),
               ),
-              const SizedBox(
+
+              // Icon(
+              //   color: Color(0xFFFFD700),
+              //   Icons.lock,
+              //   size: 100,
+              // ),
+              SizedBox(
                 height: 15,
               ),
 
@@ -50,11 +59,11 @@ class PageLogin extends StatelessWidget {
                     fontSize: 30,
                     fontWeight: FontWeight.bold),
               ),
-              const SizedBox(
+              SizedBox(
                 height: 10,
               ),
 
-              const SizedBox(
+              SizedBox(
                 height: 10,
               ),
               MyTextFeild(
@@ -62,7 +71,7 @@ class PageLogin extends StatelessWidget {
                 hinttext: 'نام کاربری',
                 secretpass: false,
               ), //username
-              const SizedBox(
+              SizedBox(
                 height: 10,
               ),
               MyTextFeild(
@@ -70,11 +79,11 @@ class PageLogin extends StatelessWidget {
                 hinttext: 'رمز عبور',
                 secretpass: true,
               ), //password
-              const SizedBox(
+              SizedBox(
                 height: 10,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 27),
+                padding: EdgeInsets.symmetric(horizontal: 27),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -85,10 +94,13 @@ class PageLogin extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(
+              SizedBox(
                 height: 10,
               ),
               //singin buttons
+              MyButtonSingin(
+                onTap: UserSingIn,
+              ),
 
               const SizedBox(
                 height: 10,
@@ -125,19 +137,22 @@ class PageLogin extends StatelessWidget {
                 height: 15,
               ),
 
-              Container(
-                padding: const EdgeInsets.all(10.0),
-                margin: const EdgeInsets.symmetric(horizontal: 26),
-                decoration: BoxDecoration(
-                    color: const Color(0xFFFFD700),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Center(
-                  child: Text(
-                    'ثبت نام',
-                    style: TextStyle(
-                        color: Colors.grey[800],
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25),
+              TextButton(
+                onPressed: () => "",
+                child: Container(
+                  padding: const EdgeInsets.all(5.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: BoxDecoration(
+                      color: Color(0xFFFFD700),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Center(
+                    child: Text(
+                      'ثبت نام',
+                      style: TextStyle(
+                          color: Colors.grey[800],
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                    ),
                   ),
                 ),
               ),
