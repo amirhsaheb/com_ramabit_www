@@ -5,6 +5,8 @@ import 'package:com_ramabit_www/my_button_login_singin.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:com_ramabit_www/main.dart';
+import 'package:com_ramabit_www/menu.dart';
+import 'package:com_ramabit_www/myappbar.dart';
 
 var token = 'aaa';
 
@@ -18,12 +20,12 @@ class PageLogin1 extends StatelessWidget {
   // ignore: non_constant_identifier_names
   void UserSingIn() async {
     var response = json.decode((await client
-            .post(Uri.parse('http://www.ryanai.ir/api/v1/token/login'), body: {
-      'username': usernamecontroller,
-      'password': passwordcontroller
+            .post(Uri.parse('https://www.ryanai.ir/api/v1/token/login'), body: {
+      'username': usernamecontroller.value.text,
+      'password': passwordcontroller.value.text
     }))
         .body);
-    token = response['data']['token'];
+    token = response['auth_token'];
     storage.write(key: 'token', value: token);
   }
 
@@ -34,6 +36,8 @@ class PageLogin1 extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: Myappsbar(),
+        drawer: Menu(),
         backgroundColor: Colors.grey[900],
         body: SafeArea(
           child: Center(
@@ -67,7 +71,10 @@ class PageLogin1 extends StatelessWidget {
               SizedBox(
                 height: 15,
               ),
-              Text(token),
+              Text(
+                token,
+                style: TextStyle(color: Colors.white),
+              ),
               //Wellcome back
               Text(
                 'به کایسی خوش آمدید ',

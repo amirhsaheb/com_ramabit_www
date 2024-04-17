@@ -5,11 +5,46 @@ import 'package:com_ramabit_www/myappbar.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/rendering/box.dart';
 import 'package:ionicons/ionicons.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-void main() async => runApp(const FirstScreen());
+var username = TextEditingController();
+var last_name = TextEditingController();
+var name = TextEditingController();
+var mobile = TextEditingController();
+var email = TextEditingController();
 
-class FirstScreen extends StatelessWidget {
-  const FirstScreen({super.key});
+class Menu extends StatefulWidget {
+  const Menu({super.key});
+
+  @override
+  FirstScreen createState() => FirstScreen();
+}
+
+class FirstScreen extends State<Menu> {
+  var user = {};
+  var client = http.Client();
+  @override
+  void initState() {
+    _getUser();
+
+    super.initState();
+  }
+
+  _getUser() async {
+    var response = json.decode((await client
+            .get(Uri.parse('https://ryanai.ir/api/v1/user'), headers: {
+      'Authorization': 'Token c2efb7e498d50d0e9f389cfa9a024209001a98c5'
+    }))
+        .body);
+    user = response;
+    username.text = response['username'].toString();
+    last_name.text = response['lastname'].toString();
+    name.text = response['name'].toString();
+    mobile.text = response['mobile'].toString();
+    email.text = response['email'].toString();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +120,8 @@ class FirstScreen extends StatelessWidget {
                                           ),
                                           Container(
                                             width: 250,
-                                            child: const TextField(
+                                            child: TextField(
+                                              controller: name,
                                               cursorHeight:
                                                   BorderSide.strokeAlignCenter,
                                               decoration: InputDecoration(
@@ -110,7 +146,8 @@ class FirstScreen extends StatelessWidget {
                                           ),
                                           Container(
                                             width: 250,
-                                            child: const TextField(
+                                            child: TextField(
+                                              controller: last_name,
                                               cursorHeight:
                                                   BorderSide.strokeAlignCenter,
                                               decoration: InputDecoration(
@@ -135,7 +172,8 @@ class FirstScreen extends StatelessWidget {
                                           ),
                                           Container(
                                             width: 250,
-                                            child: const TextField(
+                                            child: TextField(
+                                              controller: username,
                                               cursorHeight:
                                                   BorderSide.strokeAlignCenter,
                                               decoration: InputDecoration(
@@ -160,7 +198,8 @@ class FirstScreen extends StatelessWidget {
                                           ),
                                           Container(
                                             width: 250,
-                                            child: const TextField(
+                                            child: TextField(
+                                              controller: mobile,
                                               cursorHeight:
                                                   BorderSide.strokeAlignCenter,
                                               decoration: InputDecoration(
@@ -185,7 +224,8 @@ class FirstScreen extends StatelessWidget {
                                           ),
                                           Container(
                                             width: 250,
-                                            child: const TextField(
+                                            child: TextField(
+                                              controller: email,
                                               cursorHeight:
                                                   BorderSide.strokeAlignCenter,
                                               decoration: InputDecoration(
@@ -423,6 +463,5 @@ class FirstScreen extends StatelessWidget {
         ),
       ),
     );
-    return FirstScreen();
   }
 }

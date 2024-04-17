@@ -33,13 +33,13 @@ class AppBarApp extends StatelessWidget {
         return MaterialApp(
             darkTheme: ThemeData.dark(),
             themeMode: ThemeMode.values.toList()[value],
-            initialRoute: '/log',
+            initialRoute: '/index',
             routes: {
               '/index': (context) => CarouselDemoHome(),
               '/second': (context) => const FirstScreen(),
               '/balances': (context) => const Balances(),
               '/balances/1': (context) => const FirstScreen(),
-              '/profile': (context) => const profile.FirstScreen(),
+              '/profile': (context) => const profile.Menu(),
               '/myplans': (context) => const myplans.FirstScreen(),
               '/buyplans': (context) => const buyplans.FirstScreen(),
               '/charge': (context) => const chargewallet.FirstScreen(),

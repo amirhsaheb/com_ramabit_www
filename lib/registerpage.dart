@@ -127,7 +127,6 @@ class PageRegister extends StatelessWidget {
                 controller: phonenumbercontroller,
                 hinttext: 'موبایل',
                 secretpass: false,
-                numb: TextInputType.number,
               ), //password
 
               SizedBox(

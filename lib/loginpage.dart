@@ -1,17 +1,15 @@
-import 'dart:html';
-
 import 'package:com_ramabit_www/my_button_register_singup.dart';
 import 'package:flutter/material.dart';
 import 'package:com_ramabit_www/my_textfeild.dart';
 import 'package:com_ramabit_www/my_button_login_singin.dart';
-import 'package:com_ramabit_www/main.dart';
 
 class PageLogin extends StatelessWidget {
   PageLogin({super.key});
 
   final usernamecontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
-  void UserSingIn() async {}
+
+  void UserSingIn() {}
   void UserSingup() {}
 
   @override
@@ -39,7 +37,7 @@ class PageLogin extends StatelessWidget {
                       )
                     ]),
                 child: Image.asset(
-                  'images/ramlogo.png',
+                  'images/logo.png',
                   height: 90,
                 ),
               ),
@@ -72,7 +70,6 @@ class PageLogin extends StatelessWidget {
                 controller: usernamecontroller,
                 hinttext: 'نام کاربری',
                 secretpass: false,
-                numb: TextInputType.text,
               ), //username
               SizedBox(
                 height: 10,
@@ -81,7 +78,6 @@ class PageLogin extends StatelessWidget {
                 controller: passwordcontroller,
                 hinttext: 'رمز عبور',
                 secretpass: true,
-                numb: TextInputType.text,
               ), //password
               SizedBox(
                 height: 10,

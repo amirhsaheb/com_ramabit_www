@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:com_ramabit_www/main.dart';
 
 // import 'package:com_ramabit_www/node.dart';
 
@@ -28,10 +29,12 @@ class MyMenu extends State<Menu> {
 
   _getUser() async {
     user = '';
-    var response = json.decode(
-        (await client.get(Uri.parse('https://reqres.in/api/users/2'))).body);
-    user = response['data']['first_name'];
-    user = 'javd';
+    var response = json.decode((await client
+            .get(Uri.parse('https://ryanai.ir/api/v1/user'), headers: {
+      'Authorization': 'Token c2efb7e498d50d0e9f389cfa9a024209001a98c5'
+    }))
+        .body);
+    user = response['username'].toString();
     setState(() {});
   }
 
