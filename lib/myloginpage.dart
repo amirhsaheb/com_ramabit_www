@@ -36,8 +36,8 @@ class PageLogin1 extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: Myappsbar(),
-        drawer: Menu(),
+        // appBar: Myappsbar(),
+        // drawer: Menu(),
         backgroundColor: Colors.grey[900],
         body: SafeArea(
           child: Center(
@@ -47,6 +47,7 @@ class PageLogin1 extends StatelessWidget {
               ),
               //LOGO
               Container(
+                // width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                     color: Color.fromARGB(255, 67, 68, 68),
                     borderRadius: BorderRadius.circular(50),

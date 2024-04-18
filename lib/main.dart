@@ -15,6 +15,7 @@ import 'package:com_ramabit_www/history.dart' as history;
 import 'package:com_ramabit_www/transaction.dart' as trans;
 import 'package:com_ramabit_www/myloginpage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:com_ramabit_www/plandetails.dart' as detailplan;
 
 // Create storage
 final storage = new FlutterSecureStorage();
@@ -49,6 +50,7 @@ class AppBarApp extends StatelessWidget {
               '/reg': (context) => PageRegister(),
               '/log': (context) => PageLogin1(),
               '/log2': (context) => PageLogin(),
+              '/plandetail': (context) => detailplan.Menu(),
             },
             debugShowCheckedModeBanner: false,
             localizationsDelegates: const [

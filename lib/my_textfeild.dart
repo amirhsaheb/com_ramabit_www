@@ -21,7 +21,7 @@ class MyTextFeild extends StatelessWidget {
       child: TextField(
         textAlign: TextAlign.center,
         // style:,
-        // style: TextStyle(fontSize: null),
+        style: TextStyle(color: Colors.black),
         keyboardType: numb,
         controller: controller,
         obscureText: secretpass,
@@ -30,7 +30,8 @@ class MyTextFeild extends StatelessWidget {
 
           // labelText: 'Username',
           hintText: hinttext,
-          hintStyle: TextStyle(color: Colors.grey[700], fontSize: 15),
+          hintStyle: TextStyle(
+              color: const Color.fromARGB(255, 28, 28, 28), fontSize: 15),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white),
           ),
