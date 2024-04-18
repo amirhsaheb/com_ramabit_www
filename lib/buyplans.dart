@@ -329,7 +329,7 @@ class FirstScreen extends State<Menu> {
                                               ),
                                               Row(
                                                 children: [
-                                                  Text(r"$" +
+                                                  Text(
                                                       item['period'].toString())
                                                 ],
                                               )
