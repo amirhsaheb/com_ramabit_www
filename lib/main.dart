@@ -15,7 +15,6 @@ import 'package:com_ramabit_www/history.dart' as history;
 import 'package:com_ramabit_www/transaction.dart' as trans;
 import 'package:com_ramabit_www/myloginpage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:com_ramabit_www/plandetails.dart' as detailplan;
 
 // Create storage
 final storage = new FlutterSecureStorage();
@@ -42,7 +41,7 @@ class AppBarApp extends StatelessWidget {
               '/balances/1': (context) => const FirstScreen(),
               '/profile': (context) => const profile.Menu(),
               '/myplans': (context) => const myplans.FirstScreen(),
-              '/buyplans': (context) => const buyplans.FirstScreen(),
+              '/buyplans': (context) => const buyplans.Menu(),
               '/charge': (context) => const chargewallet.FirstScreen(),
               '/depos': (context) => const depos.FirstScreen(),
               '/history': (context) => const history.FirstScreen(),
