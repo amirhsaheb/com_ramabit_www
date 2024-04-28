@@ -4,15 +4,18 @@ class MyTextFeild extends StatelessWidget {
   final controller;
   final String hinttext;
   final bool secretpass;
-
+  var length;
   final TextInputType numb;
+  final int lines;
 
-  const MyTextFeild(
+  MyTextFeild(
       {super.key,
       this.controller,
       required this.hinttext,
       required this.secretpass,
-      this.numb = TextInputType.text});
+      this.numb = TextInputType.text,
+      this.length,
+      this.lines = 1});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +28,9 @@ class MyTextFeild extends StatelessWidget {
         keyboardType: numb,
         controller: controller,
         obscureText: secretpass,
+        maxLines: lines,
+        minLines: lines,
+        maxLength: length,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 8.0),
 

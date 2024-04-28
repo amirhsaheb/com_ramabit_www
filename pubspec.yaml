@@ -21,6 +21,9 @@ dependencies:
   syncfusion_flutter_charts: ^25.1.39+1
   fl_chart: ^0.67.0
   flutter_secure_storage: ^9.0.0
+  file_picker: ^8.0.1
+  flutter_exit_app: ^1.1.2
+  device_preview: ^1.1.0
 
 dev_dependencies:
   flutter_test:

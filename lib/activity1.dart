@@ -68,6 +68,7 @@ class CarouselDemoHome extends StatelessWidget {
     } else {
       isDark = true;
     }
+
     return Scaffold(
         drawer: const Menu(),
         appBar: AppBar(
@@ -174,6 +175,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                                               .06),
                                   child: TextButton(
                                       onPressed: () {
+                                        Navigator.pushNamed(context, '/depos');
                                         debugPrint('Received click');
                                       },
                                       child: const Column(
@@ -220,6 +222,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                                               .06),
                                   child: TextButton(
                                       onPressed: () {
+                                        Navigator.pushNamed(context, '/charge');
                                         debugPrint('Received click');
                                       },
                                       child: const Column(
@@ -267,6 +270,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                                               .07),
                                   child: TextButton(
                                       onPressed: () {
+                                        Navigator.pushNamed(context, '/mymine');
                                         debugPrint('Received click');
                                       },
                                       child: const Column(
@@ -318,6 +322,8 @@ class ComplicatedImageDemo extends StatelessWidget {
                                               .06),
                                   child: TextButton(
                                       onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, '/myplans');
                                         debugPrint('Received click');
                                       },
                                       child: const Column(
@@ -365,6 +371,8 @@ class ComplicatedImageDemo extends StatelessWidget {
                                   child: TextButton(
                                       onPressed: () {
                                         debugPrint('Received click');
+                                        Navigator.pushNamed(
+                                            context, '/history');
                                       },
                                       child: const Column(
                                         children: [
@@ -411,6 +419,7 @@ class ComplicatedImageDemo extends StatelessWidget {
                                               .06),
                                   child: TextButton(
                                       onPressed: () {
+                                        Navigator.pushNamed(context, '/sets');
                                         debugPrint('Received click');
                                       },
                                       child: const Column(

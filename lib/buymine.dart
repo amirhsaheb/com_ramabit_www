@@ -31,7 +31,7 @@ class _SalesData {
 int id = 1;
 
 class FirstScreen extends State<Menu> {
-  List plans = [];
+  var plans = [];
   var client = http.Client();
   void initState() {
     _getUser();
@@ -41,7 +41,10 @@ class FirstScreen extends State<Menu> {
 
   _getUser() async {
     var response = json.decode(utf8.decode((await client.get(
-      Uri.parse('https://ryanai.ir/api/v1/plan-by-currency/1'),
+      headers: {
+        'Authorization': 'Token c2efb7e498d50d0e9f389cfa9a024209001a98c5'
+      },
+      Uri.parse('https://ryanai.ir/api/v1/miner-by-currency/1'),
     ))
         .bodyBytes));
     plans = response;
@@ -364,11 +367,12 @@ class FirstScreen extends State<Menu> {
                                                                             context)
                                                                         .size
                                                                         .width *
-                                                                    0.2),
+                                                                    0.15),
                                                             child: Text(
-                                                              item['percent']
+                                                              item['profit']
                                                                       .toString() +
-                                                                  '%',
+                                                                  item['currency']
+                                                                      ['brand'],
                                                               textAlign:
                                                                   TextAlign
                                                                       .left,

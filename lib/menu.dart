@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:com_ramabit_www/main.dart';
+import 'package:flutter_exit_app/flutter_exit_app.dart';
 
 // import 'package:com_ramabit_www/node.dart';
 
@@ -20,6 +21,7 @@ class MyMenu extends State<Menu> {
   var client = http.Client();
   var user = '';
   var plansub = false;
+  var minesub = false;
   @override
   void initState() {
     _getUser();
@@ -302,6 +304,125 @@ class MyMenu extends State<Menu> {
                                               )
                                             ],
                                           ),
+
+                                          ////
+                                          Row(
+                                            children: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    if (minesub == true) {
+                                                      minesub = false;
+                                                    } else {
+                                                      {
+                                                        minesub = true;
+                                                      }
+                                                    }
+                                                  });
+                                                },
+                                                child: const Wrap(
+                                                  children: [
+                                                    Icon(
+                                                        color: Colors.white,
+                                                        Icons
+                                                            .rectangle_outlined),
+                                                    Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 0,
+                                                                right: 10)),
+                                                    Text(
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 18,
+                                                            fontFamily:
+                                                                'sansir'),
+                                                        'ماینر'),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Builder(builder: (context) {
+                                                if (minesub)
+                                                  return TextButton(
+                                                    onPressed: () {
+                                                      Navigator.pushNamed(
+                                                          context, '/buymine');
+                                                    },
+                                                    child: const Wrap(
+                                                      children: [
+                                                        Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    top: 0,
+                                                                    right: 20)),
+                                                        Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    top: 0,
+                                                                    right: 10)),
+                                                        Text(
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 18,
+                                                                fontFamily:
+                                                                    'sansir'),
+                                                            'خرید ماینر'),
+                                                      ],
+                                                    ),
+                                                  );
+                                                return const Wrap();
+                                              })
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                child:
+                                                    Builder(builder: (context) {
+                                                  if (minesub)
+                                                    return TextButton(
+                                                      onPressed: () {
+                                                        Navigator.pushNamed(
+                                                            context, '/mymine');
+                                                        ;
+                                                      },
+                                                      child: const Wrap(
+                                                        children: [
+                                                          Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      top: 0,
+                                                                      right:
+                                                                          20)),
+                                                          Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      top: 0,
+                                                                      right:
+                                                                          10)),
+                                                          Text(
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 18,
+                                                                  fontFamily:
+                                                                      'sansir'),
+                                                              'ماینر های من'),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  return const Wrap();
+                                                }),
+                                              )
+                                            ],
+                                          ),
+
+                                          ////
                                           Row(children: [
                                             TextButton(
                                                 onPressed: () {
@@ -331,7 +452,10 @@ class MyMenu extends State<Menu> {
                                           Row(
                                             children: [
                                               TextButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  Navigator.pushNamed(
+                                                      context, '/kasb');
+                                                },
                                                 child: const Wrap(
                                                   children: [
                                                     Icon(
@@ -475,7 +599,10 @@ class MyMenu extends State<Menu> {
                                           Row(
                                             children: [
                                               TextButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  Navigator.pushNamed(
+                                                      context, '/sup');
+                                                },
                                                 child: const Wrap(
                                                   children: [
                                                     Icon(
@@ -498,35 +625,38 @@ class MyMenu extends State<Menu> {
                                               )
                                             ],
                                           ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              TextButton(
-                                                onPressed: () {},
-                                                child: const Wrap(
-                                                  children: [
-                                                    Icon(
-                                                        color: Colors.white,
-                                                        Icons
-                                                            .verified_user_outlined),
-                                                    Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                top: 0,
-                                                                right: 10)),
-                                                    Text(
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 18,
-                                                            fontFamily:
-                                                                'sansir'),
-                                                        'احراز هویت'),
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
+                                          // Row(
+                                          //   mainAxisAlignment:
+                                          //       MainAxisAlignment.spaceBetween,
+                                          //   children: [
+                                          //     TextButton(
+                                          //       onPressed: () {
+                                          //         Navigator.pushNamed(
+                                          //             context, '/sets');
+                                          //       },
+                                          //       child: const Wrap(
+                                          //         children: [
+                                          //           Icon(
+                                          //               color: Colors.white,
+                                          //               Icons
+                                          //                   .verified_user_outlined),
+                                          //           Padding(
+                                          //               padding:
+                                          //                   EdgeInsets.only(
+                                          //                       top: 0,
+                                          //                       right: 10)),
+                                          //           Text(
+                                          //               style: TextStyle(
+                                          //                   color: Colors.white,
+                                          //                   fontSize: 18,
+                                          //                   fontFamily:
+                                          //                       'sansir'),
+                                          //               'احراز هویت'),
+                                          //         ],
+                                          //       ),
+                                          //     )
+                                          //   ],
+                                          // ),
                                           const Divider(
                                             color: Color.fromARGB(0, 0, 0, 0),
                                             height: 30,
@@ -534,7 +664,11 @@ class MyMenu extends State<Menu> {
                                           Row(
                                             children: [
                                               TextButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  FlutterExitApp.exitApp();
+                                                  FlutterExitApp.exitApp(
+                                                      iosForceExit: true);
+                                                },
                                                 child: const Wrap(
                                                   children: [
                                                     Icon(

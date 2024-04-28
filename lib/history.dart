@@ -66,7 +66,7 @@ class FirstScreen extends StatelessWidget {
                       Colors.lightBlue,
                     ],
                     title: const ChartTitle(
-                        text: 'تاریخچه تراکنش ها',
+                        text: 'تاریخچه درآمد ها',
                         alignment: ChartAlignment.center,
                         textStyle: TextStyle(fontFamily: 'sansir')),
                     series: [
