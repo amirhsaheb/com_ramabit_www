@@ -1,4 +1,5 @@
 import 'package:com_ramabit_www/RegisterPage.dart';
+import 'package:com_ramabit_www/activity1.dart' as index;
 import 'package:com_ramabit_www/activity1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -21,6 +22,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:com_ramabit_www/kasb.dart' as kasb;
 import 'package:com_ramabit_www/support.dart' as supp;
 import 'package:com_ramabit_www/sets.dart' as sets;
+import 'package:com_ramabit_www/empty.dart' as empty;
 import 'package:device_preview/device_preview.dart';
 
 // Create storage
@@ -40,9 +42,9 @@ class AppBarApp extends StatelessWidget {
         return MaterialApp(
             darkTheme: ThemeData.dark(),
             themeMode: ThemeMode.values.toList()[value],
-            initialRoute: '/buymine',
+            initialRoute: '/index',
             routes: {
-              '/index': (context) => CarouselDemoHome(),
+              '/index': (context) => const index.MenuIndex(),
               '/second': (context) => const FirstScreen(),
               '/balances': (context) => const Balances(),
               '/balances/1': (context) => const FirstScreen(),
@@ -62,6 +64,7 @@ class AppBarApp extends StatelessWidget {
               '/kasb': (context) => const kasb.kasby(),
               '/sup': (context) => const supp.kasby(),
               '/sets': (context) => const sets.kasby(),
+              '/empty': (context) => const empty.Menu(),
             },
             debugShowCheckedModeBanner: false,
             localizationsDelegates: const [

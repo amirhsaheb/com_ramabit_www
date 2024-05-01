@@ -35,7 +35,6 @@ class FirstScreen extends State<Menu> {
   var client = http.Client();
   void initState() {
     _getUser();
-
     super.initState();
   }
 
@@ -45,6 +44,7 @@ class FirstScreen extends State<Menu> {
     ))
         .bodyBytes));
     plans = response;
+    print(plans);
     setState(() {});
   }
 

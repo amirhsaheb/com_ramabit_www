@@ -89,7 +89,10 @@ class FirstScreen extends StatelessWidget {
                                             height: 30,
                                           ),
                                           Container(
-                                            width: 250,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                100,
                                             child: Column(
                                               children: [
                                                 Row(
