@@ -15,7 +15,7 @@ class PageLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.grey[900],
         body: SafeArea(
@@ -53,7 +53,7 @@ class PageLogin extends StatelessWidget {
 
               //Wellcome back
               Text(
-                'به رامابیت خوش آمدید ',
+                'به کایسی خوش آمدید ',
                 style: TextStyle(
                     color: Colors.grey[100],
                     fontSize: 30,
