@@ -14,7 +14,7 @@ class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Myappsbar(),
+      appBar: Myappsbar(context),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(10),

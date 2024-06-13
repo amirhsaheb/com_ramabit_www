@@ -1,18 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:com_ramabit_www/myappbar.dart';
-import 'package:com_ramabit_www/menu.dart';
+
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 //
-import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
-import 'package:fl_chart/fl_chart.dart';
+
 import 'package:flutter/src/widgets/container.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+
+import 'package:com_ramabit_www/utility/connection.dart';
 
 String period = 'all';
+
+List mineimage = [];
+String cur2 = '';
 
 class Menu extends StatefulWidget {
   const Menu({super.key});
@@ -32,29 +33,27 @@ int id = 1;
 
 class FirstScreen extends State<Menu> {
   var plans = [];
-  var client = http.Client();
+  // var client = http.Client();
   void initState() {
-    _getUser();
-
+    _getUser('');
+    _getimagecoin();
     super.initState();
   }
 
-  _getUser() async {
-    var response = json.decode(utf8.decode((await client.get(
-      headers: {
-        'Authorization': 'Token c2efb7e498d50d0e9f389cfa9a024209001a98c5'
-      },
-      Uri.parse('https://ryanai.ir/api/v1/miner-by-currency/1'),
-    ))
-        .bodyBytes));
-    plans = response;
+  _getimagecoin() async {
+    mineimage = await sendback().get('currencies');
+    setState(() {});
+  }
+
+  _getUser(periodd) async {
+    plans = await sendback().get('miners-date' + periodd);
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Myappsbar(),
+      appBar: Myappsbar(context),
       // drawer: Menu(),
       body: Column(
         children: [
@@ -70,15 +69,16 @@ class FirstScreen extends State<Menu> {
                       scrollDirection: Axis.horizontal,
                       children: [
                         Container(
-                          width: MediaQuery.sizeOf(context).width * .19,
                           // color: Colors.red,
                           child: Row(
                             children: [
                               Container(
+                                  width: MediaQuery.sizeOf(context).width * .24,
                                   child: TextButton(
                                       onPressed: () {
                                         setState(() {
                                           period = 'all';
+                                          _getUser('');
                                         });
                                       },
                                       child: Text(
@@ -100,13 +100,14 @@ class FirstScreen extends State<Menu> {
                           ),
                         ),
                         Container(
-                          width: MediaQuery.sizeOf(context).width * .19,
                           // color: Colors.blue,
                           child: Row(
                             children: [
                               Container(
+                                  width: MediaQuery.sizeOf(context).width * .24,
                                   child: TextButton(
                                       onPressed: () {
+                                        _getUser('/30');
                                         setState(() {
                                           period = '1m';
                                         });
@@ -130,43 +131,14 @@ class FirstScreen extends State<Menu> {
                           ),
                         ),
                         Container(
-                          width: MediaQuery.sizeOf(context).width * .19,
-                          // color: Colors.green,
-                          child: Row(
-                            children: [
-                              Container(
-                                  child: TextButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          period = '3m';
-                                        });
-                                      },
-                                      child: Text(
-                                        '3ماهه',
-                                        style: TextStyle(color: Colors.white),
-                                      )),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: (period == '3m')
-                                          ? Colors.green
-                                          : Color.fromARGB(255, 42, 42, 42),
-                                      border: Border(
-                                        left: BorderSide(
-                                          // color: Colors.green,
-                                          width: 1,
-                                        ),
-                                      )))
-                            ],
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.sizeOf(context).width * .19,
                           // color: Colors.yellow,
                           child: Row(
                             children: [
                               Container(
+                                  width: MediaQuery.sizeOf(context).width * .24,
                                   child: TextButton(
                                       onPressed: () {
+                                        _getUser('/180');
                                         setState(() {
                                           period = '6m';
                                         });
@@ -190,14 +162,15 @@ class FirstScreen extends State<Menu> {
                           ),
                         ),
                         Container(
-                          width: MediaQuery.sizeOf(context).width * .19,
                           // color: Colors.orange,
                           child: Row(
                             children: [
                               Container(
+                                  width: MediaQuery.sizeOf(context).width * .24,
                                   child: TextButton(
                                       onPressed: () {
                                         setState(() {
+                                          _getUser('/360');
                                           period = '1y';
                                         });
                                       },
@@ -233,6 +206,56 @@ class FirstScreen extends State<Menu> {
             ],
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
           ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width * 0.96,
+                height: MediaQuery.of(context).size.width * 0.12,
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(0, 255, 193, 7),
+                    borderRadius: BorderRadius.all(Radius.circular(5))),
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    for (var item in mineimage)
+                      Container(
+                          width: MediaQuery.of(context).size.width * 0.12,
+                          height: MediaQuery.of(context).size.width * 0.12,
+                          padding: EdgeInsets.all(1),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              // color: Color.fromARGB(255, 42, 42, 42),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5))),
+                          child: TextButton(
+                              style: ButtonStyle(
+                                  shape: MaterialStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(5)))),
+                                  backgroundColor: MaterialStatePropertyAll(
+                                      cur2 != item['name']
+                                          ? Color.fromARGB(255, 42, 42, 42)
+                                          : Colors.green),
+                                  padding: MaterialStatePropertyAll(
+                                      EdgeInsets.all(2))),
+                              onPressed: () {
+                                cur2 = item['name'];
+                                setState(() {});
+                              },
+                              child: Image.network(item['get_image']))),
+                  ],
+                ),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
           // Row(
           //   children: [
           //     Container(
@@ -263,147 +286,77 @@ class FirstScreen extends State<Menu> {
                             padding: MaterialStateProperty.all(
                                 EdgeInsets.only(right: 0))),
                         onPressed: () {
-                          Navigator.pushNamed(context, '/bes/$id');
+                          Navigator.pushNamed(context, '/singlemine',
+                              arguments: {'id': item['id']});
                         },
                         // padding: EdgeInsets.all(16),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 2),
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 2),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                        height: 60,
+                        child: Container(
+                          margin: EdgeInsets.symmetric(vertical: 2),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                      height: 40,
+
+                                      //avali
+                                      child: Image.network(
+                                        item['get_pic'],
+                                      )),
+                                  Column(
+                                    children: [
+                                      Container(
                                         width:
                                             MediaQuery.of(context).size.width *
-                                                0.2,
-                                        //avali
-                                        child: Image.asset(
-                                          'images/bit.png',
-                                          scale: 50,
-                                        )),
-                                    Column(
-                                      children: [
-                                        Row(
+                                                .75,
+                                        child: Text(
+                                          item['title'],
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                              fontFamily: 'sansir',
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15),
+                                        ),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                .75,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Container(
-                                              height: 30,
-                                              alignment: Alignment.topRight,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.7,
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 10),
-                                              child: Column(
-                                                children: [
-                                                  Wrap(
-                                                    children: [
-                                                      Text(
-                                                        item['title'],
-                                                        textAlign:
-                                                            TextAlign.right,
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'sansir',
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 15),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
+                                            Text(
+                                              'سود:',
+                                              textAlign: TextAlign.right,
+                                              style: TextStyle(
+                                                  fontFamily: 'sansir',
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15),
+                                            ),
+                                            Text(
+                                              item['profit'].toString() +
+                                                  item['currency']['brand'],
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                  fontFamily: 'sansir',
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15),
                                             ),
                                           ],
                                         ),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              height: 30,
-                                              alignment: Alignment.topRight,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.7,
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 10),
-                                              child: Column(
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Column(
-                                                        children: [
-                                                          Container(
-                                                            padding: EdgeInsets.only(
-                                                                left: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width *
-                                                                    0.2),
-                                                            child: Text(
-                                                              'سود:',
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .right,
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      'sansir',
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize: 15),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Column(
-                                                        children: [
-                                                          Container(
-                                                            padding: EdgeInsets.only(
-                                                                left: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width *
-                                                                    0.15),
-                                                            child: Text(
-                                                              item['profit']
-                                                                      .toString() +
-                                                                  item['currency']
-                                                                      ['brand'],
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .left,
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      'sansir',
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize: 15),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            color: Theme.of(context).primaryColorLight,
-                            width: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.symmetric(horizontal: 15),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
+                          color: Theme.of(context).primaryColorLight,
+                          width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.symmetric(horizontal: 15),
                         ),
                       ),
                     ],

@@ -1,3 +1,4 @@
+import 'package:com_ramabit_www/utility/connection.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -10,6 +11,8 @@ List contexList = [
   // },
 ];
 
+List eelan = [];
+
 class activityeelanview extends StatefulWidget {
   const activityeelanview({super.key});
 
@@ -21,20 +24,15 @@ class _activityeelanviewState extends State<activityeelanview> {
   var client = http.Client();
   List imageSliders = [Container()];
   void initState() {
-    _getBanner();
+    _geteelan();
     setState(() {});
     super.initState();
   }
 
-  _getBanner() async {
-    contexList = [];
-    var response = json.decode(utf8.decode((await client.get(
-      Uri.parse('https://ryanai.ir/api/v1/elan'),
-    ))
-        .bodyBytes));
-    setState(() {
-      contexList = response;
-    });
+  _geteelan() async {
+    eelan = await sendback().get('posts');
+    print(eelan);
+    setState(() {});
   }
 
   @override
@@ -53,74 +51,93 @@ class _activityeelanviewState extends State<activityeelanview> {
             const SizedBox(
               height: 50,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                'اعلان ها',
-                style: TextStyle(fontWeight: FontWeight.bold),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Wrap(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          thickness: 0.5,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'آخرین اخبار',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          thickness: 0.5,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],
         ),
-        const SizedBox(
+        SizedBox(
           height: 0.0,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Column(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              for (var item in contexList)
+              for (var item in eelan)
                 Padding(
                   padding: EdgeInsets.only(bottom: 16),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    // mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                height: 25,
-                                width: MediaQuery.of(context).size.width * 0.50,
-                                child: Text(
-                                  item['title'],
-                                  textDirection: TextDirection.rtl,
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
-                                  // overflow: TextOverflow.values.first,
-                                ),
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.50,
-                                  height: 65,
-                                  child: Text(
-                                    (item['text']),
-                                    textDirection: TextDirection.rtl,
-                                    textAlign: TextAlign.justify,
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                    ),
-                                  )),
-                            ],
-                          )
-                        ],
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.39,
+                        height: 90,
+                        child: Image.network(
+                          item['get_image'],
+                          // scale: 5,
+                        ),
                       ),
-                      Column(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            height: 100,
-                            child: Image.network(item['get_image']
-                                // scale: 5,
-                                ),
-                          )
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10, bottom: 0),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 25,
+                              width: MediaQuery.of(context).size.width * 0.50,
+                              child: Text(
+                                item['title'],
+                                textDirection: TextDirection.rtl,
+                                style: TextStyle(
+                                    fontSize: 12, fontWeight: FontWeight.bold),
+                                // overflow: TextOverflow.values.first,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.50,
+                                    height: 65,
+                                    child: Text(
+                                      (item['text']),
+                                      textDirection: TextDirection.rtl,
+                                      textAlign: TextAlign.justify,
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                      ),
+                                    )),
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   ),

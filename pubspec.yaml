@@ -1,7 +1,7 @@
 name: com_ramabit_www
-description: "A new Flutter project."
+description: "Investment app"
 publish_to: 'none'
-version: 0.1.0
+version: 1.0.0+1
 
 environment:
   sdk: '>=3.3.1 <4.0.0'
@@ -24,6 +24,7 @@ dependencies:
   file_picker: ^8.0.1
   flutter_exit_app: ^1.1.2
   device_preview: ^1.1.0
+  shamsi_date: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -36,7 +37,7 @@ flutter:
   fonts:
     - family: sansir
       fonts:
-        - asset: fonts/IranianSans.ttf
+        - asset: fonts/Vazir.ttf
           style: normal
 
   assets:

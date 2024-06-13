@@ -1,8 +1,13 @@
+import 'package:com_ramabit_www/Mymine.dart';
+import 'package:com_ramabit_www/utility/connection.dart';
 import 'package:flutter/material.dart';
 import 'package:com_ramabit_www/myappbar.dart';
 import 'package:com_ramabit_www/my_textfeild.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 
-void main() async => runApp(const kasby());
+// TextEditingController titr = TextEditingController();
+TextEditingController letter = TextEditingController();
+List tickets = [];
 
 class kasby extends StatefulWidget {
   const kasby({super.key});
@@ -12,72 +17,153 @@ class kasby extends StatefulWidget {
 }
 
 class FirstScreen extends State<kasby> {
+  void initState() {
+    _getticket();
+    super.initState();
+  }
+
+  _getticket() async {
+    tickets = await sendback().get('subjects');
+
+    setState(() {});
+  }
+
+  // _getsuptick() async {
+  //   tickets = await sendback().get('support');
+  // }
+
+  // _sendkasb() async {
+  //   await sendback().post('support', {'text': letter.text});
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Myappsbar(),
-      body: Container(
-        // color: Color.fromARGB(255, 231, 225, 225),
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+      appBar: Myappsbar(context),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
-              child: Container(
-                height: 50,
-                child: MyTextFeild(
-                  hinttext: 'تیتر',
-                  secretpass: false,
-                  numb: TextInputType.text,
-                  controller: null,
-                ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton.icon(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/addticket');
+                    },
+                    icon: Icon(Icons.add),
+                    label: Text('افزودن تیکت'))
+              ],
+            ),
+            for (var item in tickets)
+              Column(
+                children: [
+                  SizedBox(
+                    height: 0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(0),
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        height: 130,
+                        decoration: BoxDecoration(
+                            color: Colors.grey[600],
+                            borderRadius: BorderRadius.all(Radius.circular(8))),
+                        child: TextButton(
+                          style: ButtonStyle(
+                              shape: MaterialStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(8))))),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/chatsup',
+                                arguments: {'id': item[4]});
+                          },
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(item[0],
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold)),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  if (item[3] == 'در حال بررسی')
+                                    Container(
+                                        padding: EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                            color: Colors.amber[600],
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10))),
+                                        child: Text(
+                                          item[3].toString(),
+                                        )),
+                                  if (item[3] == 'پاسخ داده شده')
+                                    Container(
+                                        padding: EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                            color: Colors.orange[600],
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10))),
+                                        child: Text(
+                                          item[3].toString(),
+                                        )),
+                                  if (item[3] == 'پاسخ  مشتری')
+                                    Container(
+                                        padding: EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                            color: Colors.green[600],
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10))),
+                                        child: Text(
+                                          item[3].toString(),
+                                        )),
+                                  if (item[3] == 'بسته شده')
+                                    Container(
+                                        padding: EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                            color: Colors.red[600],
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10))),
+                                        child: Text(
+                                          item[3].toString(),
+                                        ))
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    format2(Jalali.fromDateTime(
+                                            DateTime.parse(item[1])))
+                                        .toString(),
+                                    style: TextStyle(fontSize: 16),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  )
+                ],
               ),
-            ),
-            // Container(
-            //   height: 50,
-            //   child: MyTextFeild(
-            //     hinttext: 'کسب دامد',
-            //     secretpass: false,
-            //     numb: TextInputType.text,
-            //     controller: null,
-            //   ),
-            // ),
-            SizedBox(
-              height: 10,
-            ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     DropdownMenu(
-            //       hintText: 'موقعیت شغلی',
-            //       width: MediaQuery.of(context).size.width * 0.85,
-            //       dropdownMenuEntries: [
-            //         DropdownMenuEntry(
-            //           value: 1,
-            //           label: 'تریدر',
-            //         ),
-            //         DropdownMenuEntry(
-            //           value: 2,
-            //           label: 'توسعه دهنده',
-            //         ),
-            //       ],
-            //     )
-            //   ],
-            // ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              child: MyTextFeild(
-                lines: 4,
-                hinttext: 'متن پیام',
-                secretpass: false,
-                length: 10000,
-                numb: TextInputType.text,
-                controller: null,
-              ),
-            ),
+            //////////////////////
+
+            /////////////////////
           ],
         ),
       ),

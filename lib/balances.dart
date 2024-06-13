@@ -1,46 +1,60 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:com_ramabit_www/myappbar.dart';
-import 'package:com_ramabit_www/menu.dart';
+
 import 'package:flutter/widgets.dart';
 //
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/src/widgets/container.dart';
 
-void main() async => runApp(const Balances());
+import 'package:flutter/src/widgets/container.dart';
+import 'package:com_ramabit_www/utility/connection.dart';
+
+List mojodi = [];
 
 class _SalesData {
-  _SalesData(this.year, this.sales);
+  _SalesData(this.name, this.mojoodi);
 
-  final String year;
-  final double sales;
+  final String name;
+  final double mojoodi;
 }
 
+List<_SalesData> data = [];
 int id = 1;
 
-class Balances extends StatelessWidget {
+class Balances extends StatefulWidget {
   const Balances({super.key});
 
   @override
+  State<Balances> createState() => _BalancesState();
+}
+
+class _BalancesState extends State<Balances> {
+  void initState() {
+    _getmojod();
+
+    super.initState();
+  }
+
+  _getmojod() async {
+    mojodi = await sendback().get('wallets');
+    print(mojodi);
+    data = [];
+    for (var item in mojodi) {
+      var datas = _SalesData(item[2], item[1] * item[5]);
+      data.add(datas);
+    }
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
-    List<_SalesData> data = [
-      _SalesData('Jan', 10),
-      _SalesData('Feb', 28),
-      _SalesData('Mar', 34),
-      _SalesData('Apr', 32),
-      _SalesData('May', 40),
-      _SalesData('Jan', 10),
-      _SalesData('Feb', 28),
-      _SalesData('Mar', 34),
-      _SalesData('Apr', 32),
-      _SalesData('May', 40)
-    ];
+    setState(() {});
+
     return Scaffold(
-      appBar: Myappsbar(),
+      appBar: Myappsbar(context),
       // drawer: Menu(),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Column(
           children: [
             Row(
@@ -66,7 +80,7 @@ class Balances extends StatelessWidget {
                       Colors.lightBlue,
                     ],
                     title: const ChartTitle(
-                        text: 'موجودی',
+                        // text: 'موجودی',
                         alignment: ChartAlignment.center,
                         textStyle: TextStyle(fontFamily: 'sansir')),
                     series: [
@@ -77,8 +91,8 @@ class Balances extends StatelessWidget {
                         name: 'موجودی',
                         dataLabelMapper: (_SalesData data, _) => '',
                         dataSource: data,
-                        xValueMapper: (_SalesData data, _) => data.year,
-                        yValueMapper: (_SalesData data, _) => data.sales,
+                        xValueMapper: (_SalesData data, _) => data.name,
+                        yValueMapper: (_SalesData data, _) => data.mojoodi,
                         radius: '100%',
                       )
                     ],
@@ -86,75 +100,98 @@ class Balances extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              children: [
-                TextButton(
-                  style: ButtonStyle(
-                      padding:
-                          MaterialStateProperty.all(EdgeInsets.only(right: 0))),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/balances/$id');
-                  },
-                  // padding: EdgeInsets.all(16),
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Row(
+            SizedBox(
+              height: 10,
+            ),
+            for (var item in mojodi)
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 1),
+                    child: TextButton(
+                      style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                              EdgeInsets.only(right: 0))),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/balance',
+                            arguments: {'id': item[3]});
+                      },
+                      // padding: EdgeInsets.all(16),
+                      child: Container(
+                        height: 50,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
-                              //avali
-                              children: [
-                                Image.asset(
-                                  'images/bit.png',
-                                  scale: 50,
-                                )
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                //////dovomi
-                                children: [
-                                  Padding(
-                                      padding: EdgeInsets.only(
-                                          left: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.6)),
-                                  Row(children: [Text('data')]),
-                                  Row(
-                                    children: [Text('data')],
-                                  )
-                                ],
-                              ),
-                            ),
-                            Column(
-                              //sevomi
-                              // mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Row(
                                   children: [
-                                    Text(
-                                      '10BTC',
+                                    Container(
+                                      padding: EdgeInsets.all(5),
+                                      height: 45,
+                                      child: Image.network(
+                                        item[0],
+                                      ),
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          item[4],
+                                          textAlign: TextAlign.right,
+                                          // 'data',
+                                        ),
+                                        Text(
+                                          item[2],
+                                          textAlign: TextAlign.right,
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                                Row(
-                                  children: [Text(r"$" + '60,000')],
-                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(vertical: 5),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    //sevomi
+                                    // mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Text(
+                                            item[1].toString() + item[2],
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Text(item[5].toStringAsFixed(6))
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             )
                           ],
                         ),
-                      ],
+                        color: Theme.of(context).primaryColorLight,
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.symmetric(horizontal: 15),
+                      ),
                     ),
-                    color: Theme.of(context).primaryColorLight,
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(horizontal: 15),
                   ),
-                ),
-              ],
-            )
+                ],
+              ),
           ],
         ),
       ),

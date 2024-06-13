@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'package:ionicons/ionicons.dart';
 import 'package:com_ramabit_www/menu.dart';
 import 'dart:convert';
@@ -8,14 +8,11 @@ import 'package:http/http.dart' as http;
 import 'package:com_ramabit_www/myappbar.dart';
 import 'package:com_ramabit_www/utility/activityplan.dart';
 import 'package:com_ramabit_www/utility/activityeelan.dart';
+import 'dart:math';
+import 'package:com_ramabit_www/utility/connection.dart';
 
-List imgList = [
-  // {
-  //   "get_image":
-  //       'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-  //   'title': 'banners1'
-  // },
-];
+List imgList = [];
+var rng = Random();
 
 class MenuIndex extends StatefulWidget {
   const MenuIndex({super.key});
@@ -25,19 +22,21 @@ class MenuIndex extends StatefulWidget {
 }
 
 class _SalesData {
-  _SalesData(this.year, this.sales);
+  _SalesData(this.name, this.mojoodi);
 
-  final String year;
-  final double sales;
+  final String name;
+  final double mojoodi;
 }
+
+List<_SalesData> data = [];
+int id = 1;
 
 final themeMode = ValueNotifier(2);
 var isDark = true;
-
+var aaa = rng.nextInt(1000);
 //firstpage
 
 class CarouselDemoHome extends State<MenuIndex> {
-  var client = http.Client();
   List imageSliders = [Container()];
   void initState() {
     _getBanner();
@@ -46,16 +45,9 @@ class CarouselDemoHome extends State<MenuIndex> {
   }
 
   _getBanner() async {
-    imgList = [];
-    var response = json.decode(utf8.decode((await client.get(
-      Uri.parse('https://ryanai.ir/api/v1/banner'),
-    ))
-        .bodyBytes));
-    setState(() {
-      imgList = response;
-    });
+    imgList = await sendback().get('banner');
 
-    print(imgList);
+    setState(() {});
 
     imageSliders = imgList
         .map((item) => Container(
@@ -98,389 +90,430 @@ class CarouselDemoHome extends State<MenuIndex> {
                   )),
             ))
         .toList();
-
-    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      void initState() {
-        _getBanner();
-        setState(() {});
-        super.initState();
-      }
-    });
-    return Scaffold(
-      appBar: Myappsbar(),
-      drawer: Menu(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              child: CarouselSlider.builder(
-                options: CarouselOptions(
-                  autoPlay: true,
-                  aspectRatio: 2.0,
-                  enlargeCenterPage: true,
+    return PopScope(
+        canPop: false,
+        child: Scaffold(
+          floatingActionButton: Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: FloatingActionButton(
+                elevation: 10,
+                onPressed: () {
+                  // Add your onPressed code here!
+                  Navigator.pushNamed(context, '/chat');
+                },
+                child: Icon(
+                  Icons.support_agent,
+                  size: 35,
                 ),
-                itemCount: imageSliders.length,
-                itemBuilder: (context, index, realIndex) => imageSliders[index],
+                backgroundColor: Colors.cyan,
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            SafeArea(
-              child: Container(
-                color: Theme.of(context).hoverColor,
-                child: Column(
+          ),
+          appBar: Myappsbar(context),
+          drawer: Menu(),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                StatefulBuilder(builder: (BuildContext context, setState) {
+                  return Container(
+                    child: CarouselSlider.builder(
+                      options: CarouselOptions(
+                        autoPlay: true,
+                        aspectRatio: 2.0,
+                        enlargeCenterPage: true,
+                      ),
+                      itemCount: imageSliders.length,
+                      itemBuilder: (context, index, realIndex) =>
+                          imageSliders[index],
+                    ),
+                  );
+                }),
+                const SizedBox(
+                  height: 10,
+                ),
+                SafeArea(
+                  child: Container(
+                    color: Theme.of(context).hoverColor,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * .33,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.pushNamed(
+                                                context, '/addusers1');
+                                            debugPrint('Received click');
+                                          },
+                                          child: const Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons
+                                                        .person_add_alt_rounded,
+                                                    size: 26,
+                                                    color: Color.fromARGB(
+                                                        255, 240, 187, 11),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'دعوت',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 12),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          )
+                                          // Text('\n'),
+
+                                          )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * .33,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.pushNamed(
+                                                context, '/sup');
+                                            debugPrint('Received click');
+                                          },
+                                          child: const Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.support,
+                                                    size: 26,
+                                                    color: Color.fromARGB(
+                                                        255, 240, 187, 11),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'تیکت ها',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 12),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          )
+                                          // Text('\n'),
+
+                                          )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * .33,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.pushNamed(
+                                                context, '/mymine');
+                                            debugPrint('Received click');
+                                          },
+                                          child: const Column(
+                                            children: [
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Icon(
+                                                    Ionicons
+                                                        .hardware_chip_outline,
+                                                    size: 26,
+                                                    color: Color.fromARGB(
+                                                        255, 240, 187, 11),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'ماینر',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 12),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          )
+                                          // Text('\n'),
+
+                                          )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * .33,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.pushNamed(
+                                                context, '/myplans');
+                                            debugPrint('Received click');
+                                          },
+                                          child: const Column(
+                                            children: [
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Icon(
+                                                    Ionicons.cube_outline,
+                                                    size: 26,
+                                                    color: Color.fromARGB(
+                                                        255, 240, 187, 11),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'پلن ها',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 12),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          )
+                                          // Text('\n'),
+
+                                          )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * .33,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {
+                                            debugPrint('Received click');
+                                            Navigator.pushNamed(
+                                                context, '/history');
+                                          },
+                                          child: const Column(
+                                            children: [
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Icon(
+                                                    Ionicons.time_outline,
+                                                    size: 26,
+                                                    color: Color.fromARGB(
+                                                        255, 240, 187, 11),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'تاریخچه',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 12),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          )
+                                          // Text('\n'),
+
+                                          )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * .33,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.pushNamed(
+                                                context, '/profile');
+                                            debugPrint('Received click');
+                                          },
+                                          child: const Column(
+                                            children: [
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Icon(
+                                                    Icons.person,
+                                                    size: 24,
+                                                    color: Color.fromARGB(
+                                                        255, 240, 187, 11),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'پروفایل',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 12),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          )
+                                          // Text('\n'),
+
+                                          )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+
+                        // Container(
+                        //   width: 200,
+                        //   height: 150,
+                        //   child: Text('data'),
+                        //   color: Colors.blue[400],
+
+                        // )
+                      ],
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          MediaQuery.of(context).size.width *
-                                              .06),
-                                  child: TextButton(
-                                      onPressed: () {
-                                        Navigator.pushNamed(context, '/depos');
-                                        debugPrint('Received click');
-                                      },
-                                      child: const Column(
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Icon(
-                                                Ionicons.log_out_outline,
-                                                size: 26,
-                                                color: Color.fromARGB(
-                                                    255, 240, 187, 11),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'برداشت',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      )
-                                      // Text('\n'),
-
-                                      ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          MediaQuery.of(context).size.width *
-                                              .06),
-                                  child: TextButton(
-                                      onPressed: () {
-                                        Navigator.pushNamed(context, '/charge');
-                                        debugPrint('Received click');
-                                      },
-                                      child: const Column(
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Icon(
-                                                Ionicons.log_in_outline,
-                                                size: 26,
-                                                color: Color.fromARGB(
-                                                    255, 240, 187, 11),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'واریز',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      )
-                                      // Text('\n'),
-
-                                      ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          MediaQuery.of(context).size.width *
-                                              .07),
-                                  child: TextButton(
-                                      onPressed: () {
-                                        Navigator.pushNamed(context, '/mymine');
-                                        debugPrint('Received click');
-                                      },
-                                      child: const Column(
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Icon(
-                                                Ionicons.hardware_chip_outline,
-                                                size: 26,
-                                                color: Color.fromARGB(
-                                                    255, 240, 187, 11),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'ماینر',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      )
-                                      // Text('\n'),
-
-                                      ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ],
+                    Expanded(
+                      child: Divider(
+                        thickness: 0.5,
+                        color: Colors.grey[400],
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          MediaQuery.of(context).size.width *
-                                              .06),
-                                  child: TextButton(
-                                      onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, '/myplans');
-                                        debugPrint('Received click');
-                                      },
-                                      child: const Column(
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Icon(
-                                                Ionicons.cube_outline,
-                                                size: 26,
-                                                color: Color.fromARGB(
-                                                    255, 240, 187, 11),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'پلن ها',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      )
-                                      // Text('\n'),
-
-                                      ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          MediaQuery.of(context).size.width *
-                                              .06),
-                                  child: TextButton(
-                                      onPressed: () {
-                                        debugPrint('Received click');
-                                        Navigator.pushNamed(
-                                            context, '/history');
-                                      },
-                                      child: const Column(
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Icon(
-                                                Ionicons.time_outline,
-                                                size: 26,
-                                                color: Color.fromARGB(
-                                                    255, 240, 187, 11),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'تاریخچه',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      )
-                                      // Text('\n'),
-
-                                      ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          MediaQuery.of(context).size.width *
-                                              .06),
-                                  child: TextButton(
-                                      onPressed: () {
-                                        Navigator.pushNamed(context, '/sets');
-                                        debugPrint('Received click');
-                                      },
-                                      child: const Column(
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Icon(
-                                                Ionicons.briefcase_outline,
-                                                size: 24,
-                                                color: Color.fromARGB(
-                                                    255, 240, 187, 11),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'کسب دارمد',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      )
-                                      // Text('\n'),
-
-                                      ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ],
+                    const SizedBox(
+                      height: 50,
                     ),
-
-                    // Container(
-                    //   width: 200,
-                    //   height: 150,
-                    //   child: Text('data'),
-                    //   color: Colors.blue[400],
-
-                    // )
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Wrap(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Divider(
+                                  thickness: 0.5,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'موجودی ها',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ),
+                              Expanded(
+                                child: Divider(
+                                  thickness: 0.5,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Expanded(
+                    //   child: Divider(
+                    //     thickness: 0.5,
+                    //     color: Colors.grey[400],
+                    //   ),
+                    // ),
                   ],
                 ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: Divider(
-                    thickness: 0.5,
-                    color: Colors.grey[400],
-                  ),
-                ),
                 const SizedBox(
-                  height: 50,
+                  height: 0,
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(
-                    'پلن ها',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                // Expanded(
-                //   child: Divider(
-                //     thickness: 0.5,
-                //     color: Colors.grey[400],
-                //   ),
-                // ),
+                ////////////////////////////////////////
+                activityplansviewState(),
+                /////////////////////////////////////////////////
+                activityeelanview(),
               ],
             ),
-            const SizedBox(
-              height: 0,
-            ),
-            ////////////////////////////////////////
-            activityplansviewState(),
-            /////////////////////////////////////////////////
-            activityeelanview(),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }

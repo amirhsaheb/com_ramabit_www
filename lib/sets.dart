@@ -18,7 +18,7 @@ class FirstScreen extends State<kasby> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Myappsbar(),
+      appBar: Myappsbar(context),
       body: Container(
         // color: Color.fromARGB(255, 231, 225, 225),
         height: MediaQuery.of(context).size.height,

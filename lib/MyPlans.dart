@@ -4,281 +4,198 @@ import 'package:flutter/material.dart';
 import 'package:com_ramabit_www/myappbar.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/rendering/box.dart';
+import 'package:com_ramabit_www/utility/connection.dart';
+
+List plans = [];
 
 void main() async => runApp(const FirstScreen());
 
-class FirstScreen extends StatelessWidget {
+class FirstScreen extends StatefulWidget {
   const FirstScreen({super.key});
+
+  @override
+  State<FirstScreen> createState() => _FirstScreenState();
+}
+
+class _FirstScreenState extends State<FirstScreen> {
+  void initState() {
+    _getPlans();
+    super.initState();
+  }
+
+  _getPlans() async {
+    plans = await sendback().get('plan');
+    setState(() {});
+  }
+
+  _ClosePlans(id) async {
+    var result = await sendback().post('closeplan', {'bidid': id.toString()});
+    showAlertDialog(context, result.toString());
+    _getPlans();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Myappsbar(),
+      appBar: Myappsbar(context),
       body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.all(10),
-          width: MediaQuery.of(context).size.width,
-          child: Column(children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  children: [
-                    // Row(
-                    //   children: [icon
-                    //     // Image.asset(
-                    //     //   'images/bit.png',
-                    //     //   scale: 40,
-                    //     // ),
-                    //   ],
-                    // ),
-                    // Row(
-                    //   children: [
-                    //     Text(
-                    //       'واریز و برداشت',
-                    //       style: TextStyle(
-                    //           fontSize: 25,
-                    //           fontWeight: FontWeight.bold,
-                    //           fontFamily: 'sansir.ttf'),
-                    //     ),
-                    //   ],
-                    // ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          color: Theme.of(context).highlightColor,
-                          width: MediaQuery.of(context).size.width - 20,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.all(0),
-                          child: Wrap(
-                            children: [
-                              Column(
-                                children: [
-                                  Row(
-                                    // mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.all(10),
-                                        width:
-                                            MediaQuery.of(context).size.width -
-                                                20,
-                                        color: Colors.green,
-                                        child: Text(
-                                          'پلن 5 ماهه بیت کوین',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20),
-                                        ),
-                                      ),
-                                    ],
+        child: Wrap(
+          children: [
+            for (var item in plans)
+              Column(
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        color: Theme.of(context).highlightColor,
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(10),
+                                  width: MediaQuery.of(context).size.width,
+                                  color: Colors.green,
+                                  child: Text(
+                                    item['plan']['title'],
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.all(20),
-                                        child: Column(children: [
-                                          Image.asset(
-                                            'images/bit.png',
-                                            scale: 20,
-                                          ),
-                                          SizedBox(
-                                            height: 30,
-                                          ),
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width -
-                                                100,
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Column(
-                                                      children: [
-                                                        Container(
-                                                          width: (MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.5) -
-                                                              60,
-                                                          child:
-                                                              Text('مبلغ شروع'),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Column(
-                                                      children: [
-                                                        Container(
-                                                          alignment: Alignment
-                                                              .centerLeft,
-                                                          width: (MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.5) -
-                                                              60,
-                                                          child: Text(
-                                                              '011.110101'),
-                                                        )
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Column(
-                                                      children: [
-                                                        Container(
-                                                          width: (MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.5) -
-                                                              60,
-                                                          child:
-                                                              Text('زمان شروع'),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Column(
-                                                      children: [
-                                                        Container(
-                                                          alignment: Alignment
-                                                              .centerLeft,
-                                                          width: (MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.5) -
-                                                              60,
-                                                          child: Text(
-                                                              '20202.02.2'),
-                                                        )
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Column(
-                                                      children: [
-                                                        Container(
-                                                          width: (MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.5) -
-                                                              60,
-                                                          child: Text('دوره'),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Column(
-                                                      children: [
-                                                        Container(
-                                                          alignment: Alignment
-                                                              .centerLeft,
-                                                          width: (MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.5) -
-                                                              60,
-                                                          child:
-                                                              Text('30 روز '),
-                                                        )
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Column(
-                                                      children: [
-                                                        Container(
-                                                          width: (MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.5) -
-                                                              60,
-                                                          child:
-                                                              Text('درصد سود'),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Column(
-                                                      children: [
-                                                        Container(
-                                                          alignment: Alignment
-                                                              .centerLeft,
-                                                          width: (MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.5) -
-                                                              60,
-                                                          child: Text('5%'),
-                                                        )
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                        ]),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  TextButton(
-                                      style: ButtonStyle(
-                                          padding: MaterialStateProperty.all(
-                                              EdgeInsets.symmetric(
-                                                  horizontal: 20, vertical: 0)),
-                                          backgroundColor: MaterialStateProperty
-                                              .all(Colors.red[800]),
-                                          shape: MaterialStateProperty.all(
-                                              RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(
-                                                              8))))),
-                                      onPressed: () {},
-                                      child: Text(
-                                        'بستن پلن',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
-                                      )),
-                                ],
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ]),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(20),
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Column(children: [
+                                    Image.network(
+                                      item['get_image'],
+                                      width: MediaQuery.of(context).size.width *
+                                          0.2,
+                                    ),
+                                    SizedBox(
+                                      height: 30,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('مبلغ شروع'),
+                                        Text(item['deposit'].toString())
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('زمان شروع'),
+                                        Text(item['date_field'].toString())
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('دوره'),
+                                        Text(item['plan']['period']
+                                            .toString()
+                                            .replaceFirst(
+                                                'half-year', ' شش ماهه')
+                                            .replaceFirst('year', '  سالانه')
+                                            .replaceFirst('month', ' ماهانه'))
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('درصد سود'),
+                                        Text(item['plan']['percent'].toString())
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                  ]),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton(
+                                    style: ButtonStyle(
+                                        padding: MaterialStateProperty.all(
+                                            EdgeInsets.symmetric(
+                                                horizontal: 20, vertical: 0)),
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.red[800]),
+                                        shape: MaterialStateProperty.all(
+                                            RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(8))))),
+                                    onPressed: () {
+                                      _ClosePlans(item['id']);
+                                    },
+                                    child: Text(
+                                      'بستن پلن',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20),
+                                    )),
+                                SizedBox(
+                                  height: 20,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+          ],
         ),
       ),
     );
-    return FirstScreen();
+  }
+
+  showAlertDialog(BuildContext context, result) {
+    // set up the button
+    // Widget okButton = TextButton(
+    //   child: Text("OK"),
+    //   onPressed: () {},
+    // );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("نتیجه"),
+      content: Text(result),
+      // actions: [
+      //   // okButton,
+      // ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }

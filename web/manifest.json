@@ -1,11 +1,11 @@
 {
-    "name": "com_ramabit_www",
-    "short_name": "com_ramabit_www",
+    "name": "Ramabit",
+    "short_name": "Ramabit",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Ramabit-investment",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

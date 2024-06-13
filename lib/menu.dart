@@ -1,14 +1,15 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:convert';
+import 'package:com_ramabit_www/utility/connection.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:com_ramabit_www/main.dart';
 import 'package:flutter_exit_app/flutter_exit_app.dart';
 
+List mojodiuser = [];
+double mojodiuser1 = 0;
 // import 'package:com_ramabit_www/node.dart';
-
-void main() async => runApp(const Menu());
 
 class Menu extends StatefulWidget {
   const Menu({super.key});
@@ -25,18 +26,28 @@ class MyMenu extends State<Menu> {
   @override
   void initState() {
     _getUser();
-
+    _getmojodiuser();
     super.initState();
   }
 
   _getUser() async {
     user = '';
-    var response = json.decode((await client
-            .get(Uri.parse('https://ryanai.ir/api/v1/user'), headers: {
-      'Authorization': 'Token c2efb7e498d50d0e9f389cfa9a024209001a98c5'
-    }))
-        .body);
+    var response = await sendback().get('user');
+
     user = response['username'].toString();
+    setState(() {});
+  }
+
+  _getmojodiuser() async {
+    mojodiuser = await sendback().get('wallets');
+    mojodiuser1 = 0;
+    for (var item in mojodiuser) {
+      mojodiuser1 = mojodiuser1 + (item[1] * item[5]);
+    }
+    Future.delayed(const Duration(milliseconds: 5000), () {
+      _getmojodiuser();
+      setState(() {});
+    });
     setState(() {});
   }
 
@@ -64,8 +75,10 @@ class MyMenu extends State<Menu> {
                               const Column(
                                 children: [
                                   CircleAvatar(
-                                      backgroundImage:
-                                          AssetImage('images/man.png')),
+                                    backgroundImage: AssetImage(
+                                      'images/userav.jpg',
+                                    ),
+                                  ),
                                 ],
                               ),
                               const Padding(
@@ -82,14 +95,14 @@ class MyMenu extends State<Menu> {
                                           user),
                                     ],
                                   ),
-                                  const Row(
+                                  Row(
                                     children: [
                                       Text(
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 12,
                                               fontFamily: 'sansir'),
-                                          "موجودی : 10,000 دلار"),
+                                          mojodiuser1.toString()),
                                     ],
                                   ),
                                 ],
@@ -160,6 +173,38 @@ class MyMenu extends State<Menu> {
                                           //     ),
                                           //   ],
                                           // ),
+                                          Row(
+                                            children: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.pushNamed(
+                                                      context, '/addusers1');
+                                                },
+                                                child: const Wrap(
+                                                  children: [
+                                                    Icon(
+                                                      color: Colors.white,
+                                                      Icons
+                                                          .person_add_alt_rounded,
+                                                      size: 22,
+                                                    ),
+                                                    Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 0,
+                                                                right: 10)),
+                                                    Text(
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 18,
+                                                            fontFamily:
+                                                                'sansir'),
+                                                        'مجموعه گیری'),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
                                           Row(
                                             children: [
                                               TextButton(
@@ -449,94 +494,94 @@ class MyMenu extends State<Menu> {
                                                   ],
                                                 ))
                                           ]),
-                                          Row(
-                                            children: [
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.pushNamed(
-                                                      context, '/kasb');
-                                                },
-                                                child: const Wrap(
-                                                  children: [
-                                                    Icon(
-                                                        color: Colors.white,
-                                                        Icons.paid),
-                                                    Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                top: 0,
-                                                                right: 10)),
-                                                    Text(
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 18,
-                                                            fontFamily:
-                                                                'sansir'),
-                                                        'کسب درآمد'),
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.pushNamed(
-                                                      context, '/charge');
-                                                },
-                                                child: const Wrap(
-                                                  children: [
-                                                    Icon(
-                                                        color: Colors.white,
-                                                        Icons
-                                                            .battery_charging_full),
-                                                    Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                top: 0,
-                                                                right: 10)),
-                                                    Text(
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 18,
-                                                            fontFamily:
-                                                                'sansir'),
-                                                        'شاژ حساب'),
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.pushNamed(
-                                                      context, '/depos');
-                                                },
-                                                child: const Wrap(
-                                                  children: [
-                                                    Icon(
-                                                        color: Colors.white,
-                                                        Icons.outbox),
-                                                    Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                top: 0,
-                                                                right: 10)),
-                                                    Text(
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 18,
-                                                            fontFamily:
-                                                                'sansir'),
-                                                        'برداشت'),
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
+                                          // Row(
+                                          //   children: [
+                                          //     TextButton(
+                                          //       onPressed: () {
+                                          //         Navigator.pushNamed(
+                                          //             context, '/kasb');
+                                          //       },
+                                          //       child: const Wrap(
+                                          //         children: [
+                                          //           Icon(
+                                          //               color: Colors.white,
+                                          //               Icons.paid),
+                                          //           Padding(
+                                          //               padding:
+                                          //                   EdgeInsets.only(
+                                          //                       top: 0,
+                                          //                       right: 10)),
+                                          //           Text(
+                                          //               style: TextStyle(
+                                          //                   color: Colors.white,
+                                          //                   fontSize: 18,
+                                          //                   fontFamily:
+                                          //                       'sansir'),
+                                          //               'کسب درآمد'),
+                                          //         ],
+                                          //       ),
+                                          //     )
+                                          //   ],
+                                          // ),
+                                          // Row(
+                                          //   children: [
+                                          //     TextButton(
+                                          //       onPressed: () {
+                                          //         Navigator.pushNamed(
+                                          //             context, '/charge');
+                                          //       },
+                                          //       child: const Wrap(
+                                          //         children: [
+                                          //           Icon(
+                                          //               color: Colors.white,
+                                          //               Icons
+                                          //                   .battery_charging_full),
+                                          //           Padding(
+                                          //               padding:
+                                          //                   EdgeInsets.only(
+                                          //                       top: 0,
+                                          //                       right: 10)),
+                                          //           Text(
+                                          //               style: TextStyle(
+                                          //                   color: Colors.white,
+                                          //                   fontSize: 18,
+                                          //                   fontFamily:
+                                          //                       'sansir'),
+                                          //               'شاژ حساب'),
+                                          //         ],
+                                          //       ),
+                                          //     )
+                                          //   ],
+                                          // ),
+                                          // Row(
+                                          //   children: [
+                                          //     TextButton(
+                                          //       onPressed: () {
+                                          //         Navigator.pushNamed(
+                                          //             context, '/depos');
+                                          //       },
+                                          //       child: const Wrap(
+                                          //         children: [
+                                          //           Icon(
+                                          //               color: Colors.white,
+                                          //               Icons.outbox),
+                                          //           Padding(
+                                          //               padding:
+                                          //                   EdgeInsets.only(
+                                          //                       top: 0,
+                                          //                       right: 10)),
+                                          //           Text(
+                                          //               style: TextStyle(
+                                          //                   color: Colors.white,
+                                          //                   fontSize: 18,
+                                          //                   fontFamily:
+                                          //                       'sansir'),
+                                          //               'برداشت'),
+                                          //         ],
+                                          //       ),
+                                          //     )
+                                          //   ],
+                                          // ),
                                           Row(
                                             children: [
                                               TextButton(
@@ -619,7 +664,7 @@ class MyMenu extends State<Menu> {
                                                             fontSize: 18,
                                                             fontFamily:
                                                                 'sansir'),
-                                                        'پشتیبانی'),
+                                                        'تیکت ها'),
                                                   ],
                                                 ),
                                               )
@@ -665,9 +710,13 @@ class MyMenu extends State<Menu> {
                                             children: [
                                               TextButton(
                                                 onPressed: () {
-                                                  FlutterExitApp.exitApp();
-                                                  FlutterExitApp.exitApp(
-                                                      iosForceExit: true);
+                                                  storage.write(
+                                                      key: 'token', value: '');
+                                                  Navigator.pushNamed(
+                                                      context, '/empty');
+                                                  //FlutterExitApp.exitApp();
+                                                  //FlutterExitApp.exitApp(
+                                                  //    iosForceExit: true);
                                                 },
                                                 child: const Wrap(
                                                   children: [

@@ -1,4 +1,5 @@
 import 'package:com_ramabit_www/activity1.dart';
+import 'package:com_ramabit_www/utility/connection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:com_ramabit_www/myappbar.dart';
@@ -6,15 +7,24 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/rendering/box.dart';
 import 'package:ionicons/ionicons.dart';
 
-void main() async => runApp(const FirstScreen());
+TextEditingController mablagh = TextEditingController();
+TextEditingController wallet = TextEditingController();
+TextEditingController pass = TextEditingController();
 
-class FirstScreen extends StatelessWidget {
+class FirstScreen extends StatefulWidget {
   const FirstScreen({super.key});
+
+  @override
+  State<FirstScreen> createState() => _FirstScreenState();
+}
+
+class _FirstScreenState extends State<FirstScreen> {
+// _sendifocharge()async{await sendback().post('charge', body, headers)}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Myappsbar(),
+      appBar: Myappsbar(context),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(10),
@@ -85,7 +95,8 @@ class FirstScreen extends StatelessWidget {
                                           ),
                                           Container(
                                             width: 250,
-                                            child: const TextField(
+                                            child: TextField(
+                                              controller: mablagh,
                                               cursorHeight:
                                                   BorderSide.strokeAlignCenter,
                                               decoration: InputDecoration(
@@ -106,7 +117,8 @@ class FirstScreen extends StatelessWidget {
                                           ),
                                           Container(
                                             width: 250,
-                                            child: const TextField(
+                                            child: TextField(
+                                              controller: wallet,
                                               cursorHeight:
                                                   BorderSide.strokeAlignCenter,
                                               decoration: InputDecoration(
@@ -213,7 +225,8 @@ class FirstScreen extends StatelessWidget {
                                         child: Column(children: [
                                           Container(
                                             width: 250,
-                                            child: const TextField(
+                                            child: TextField(
+                                              controller: pass,
                                               cursorHeight:
                                                   BorderSide.strokeAlignCenter,
                                               decoration: InputDecoration(

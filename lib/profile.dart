@@ -8,11 +8,18 @@ import 'package:ionicons/ionicons.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import 'package:com_ramabit_www/utility/connection.dart';
+
 var username = TextEditingController();
 var last_name = TextEditingController();
 var name = TextEditingController();
 var mobile = TextEditingController();
 var email = TextEditingController();
+
+///
+var lpassword = TextEditingController();
+var password = TextEditingController();
+var vpassword = TextEditingController();
 
 class Menu extends StatefulWidget {
   const Menu({super.key});
@@ -33,8 +40,8 @@ class FirstScreen extends State<Menu> {
 
   _getUser() async {
     var response = json.decode((await client
-            .get(Uri.parse('https://ryanai.ir/api/v1/user'), headers: {
-      'Authorization': 'Token c2efb7e498d50d0e9f389cfa9a024209001a98c5'
+            .get(Uri.parse('https://ramabit.com/api/v1/user'), headers: {
+      'Authorization': 'Token 28be5bb7997f6d981e176e26a53c2614870a5613'
     }))
         .body);
     user = response;
@@ -43,13 +50,20 @@ class FirstScreen extends State<Menu> {
     name.text = response['name'].toString();
     mobile.text = response['mobile'].toString();
     email.text = response['email'].toString();
+
     setState(() {});
+  }
+
+  changepass() async {
+    var pass = await sendback().post('users/set_password/',
+        {'current_password': lpassword.text, 'new_password': password.text});
+    print(pass);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Myappsbar(),
+      appBar: Myappsbar(context),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(10),
@@ -333,7 +347,11 @@ class FirstScreen extends State<Menu> {
                                         child: Column(children: [
                                           Container(
                                             width: 250,
-                                            child: const TextField(
+                                            child: TextField(
+                                              obscureText: true,
+                                              keyboardType:
+                                                  TextInputType.visiblePassword,
+                                              controller: lpassword,
                                               cursorHeight:
                                                   BorderSide.strokeAlignCenter,
                                               decoration: InputDecoration(
@@ -354,7 +372,9 @@ class FirstScreen extends State<Menu> {
                                           ),
                                           Container(
                                             width: 250,
-                                            child: const TextField(
+                                            child: TextField(
+                                              obscureText: true,
+                                              controller: password,
                                               cursorHeight:
                                                   BorderSide.strokeAlignCenter,
                                               decoration: InputDecoration(
@@ -375,7 +395,9 @@ class FirstScreen extends State<Menu> {
                                           ),
                                           Container(
                                             width: 250,
-                                            child: const TextField(
+                                            child: TextField(
+                                              obscureText: true,
+                                              controller: vpassword,
                                               cursorHeight:
                                                   BorderSide.strokeAlignCenter,
                                               decoration: InputDecoration(
@@ -408,7 +430,9 @@ class FirstScreen extends State<Menu> {
                                                               BorderRadius.all(
                                                                   Radius.circular(
                                                                       8))))),
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                changepass();
+                                              },
                                               child: Text(
                                                 'ثبت',
                                                 style: TextStyle(
