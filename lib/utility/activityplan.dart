@@ -53,6 +53,7 @@ class _activityplansviewStateState extends State<activityplansviewState> {
   }
 
   _getchart() async {
+    usd = 0;
     mojodi = await sendback().get('wallets');
     // print(mojodi);
     data = [];
